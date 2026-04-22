@@ -23,15 +23,49 @@ Opens Storybook at `http://localhost:6006` to preview components.
 
 ## 🔗 Usage in Main Project
 
-Add as git submodule:
+### 1. Add as git submodule:
 ```bash
 git submodule add https://github.com/rolandbenedetti73/p1-secondary-shared-library.git lib/puck/secondary-components
 ```
 
-Import in your registry:
+### 2. Configure Tailwind
+
+Add the preset to your `tailwind.config.js`:
+```javascript
+module.exports = {
+  presets: [
+    require('./lib/puck/secondary-components/tailwind.preset'),
+  ],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './lib/puck/secondary-components/components/**/*.tsx',
+  ],
+  // ... rest of your config
+};
+```
+
+### 3. Import CSS variables (optional)
+
+Add to your global CSS:
+```css
+@import '../lib/puck/secondary-components/styles/variables.css';
+```
+
+### 4. Import in your registry:
 ```typescript
 import { SecondTestBlock } from "./secondary-components/components/second-test";
 import { TestBlock } from "./secondary-components/components/test";
+```
+
+## 🎨 Customization
+
+Override CSS variables in your global styles:
+```css
+:root {
+  --puck-primary: #8b5cf6;      /* Change primary color to purple */
+  --puck-spacing-md: 1.5rem;    /* Increase default spacing */
+}
 ```
 
 ## 📚 Documentation

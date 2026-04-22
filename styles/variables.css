@@ -1,0 +1,28 @@
+/* CSS Variables for Puck Components */
+/* Override these in your consuming project to customize the theme */
+
+:root {
+  /* Colors */
+  --puck-primary: #3b82f6;
+  --puck-secondary: #64748b;
+  --puck-success: #10b981;
+  --puck-warning: #f59e0b;
+  --puck-error: #ef4444;
+  --puck-bg-light: #fef3c7;
+  --puck-bg-default: #ffffff;
+  --puck-text: #111827;
+  --puck-text-muted: #6b7280;
+  --puck-border: #e5e7eb;
+
+  /* Spacing */
+  --puck-spacing-xs: 0.25rem;
+  --puck-spacing-sm: 0.5rem;
+  --puck-spacing-md: 1rem;
+  --puck-spacing-lg: 1.5rem;
+  --puck-spacing-xl: 2rem;
+
+  /* Border Radius */
+  --puck-radius-sm: 0.25rem;
+  --puck-radius-md: 0.5rem;
+  --puck-radius-lg: 0.75rem;
+}
