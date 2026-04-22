@@ -63,8 +63,8 @@ import { TestBlock } from "./secondary-components/components/test";
 Override CSS variables in your global styles:
 ```css
 :root {
-  --puck-primary: #8b5cf6;      /* Change primary color to purple */
-  --puck-spacing-md: 1.5rem;    /* Increase default spacing */
+  --p1-primary: #8b5cf6;      /* Change primary color to purple */
+  --p1-spacing-md: 1.5rem;    /* Increase default spacing */
 }
 ```
 
