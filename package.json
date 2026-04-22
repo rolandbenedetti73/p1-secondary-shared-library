@@ -1,0 +1,45 @@
+{
+  "name": "p1-secondary-shared-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rolandbenedetti73/p1-secondary-shared-library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rolandbenedetti73/p1-secondary-shared-library/issues"
+  },
+  "homepage": "https://github.com/rolandbenedetti73/p1-secondary-shared-library#readme",
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.1.2",
+    "@puckeditor/core": "^0.21.2",
+    "@storybook/addon-a11y": "^10.3.5",
+    "@storybook/addon-docs": "^10.3.5",
+    "@storybook/addon-onboarding": "^10.3.5",
+    "@storybook/addon-vitest": "^10.3.5",
+    "@storybook/react-vite": "^10.3.5",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/browser-playwright": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.5",
+    "autoprefixer": "^10.5.0",
+    "playwright": "^1.59.1",
+    "postcss": "^8.5.10",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "storybook": "^10.3.5",
+    "tailwindcss": "^4.2.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.5"
+  }
+}
