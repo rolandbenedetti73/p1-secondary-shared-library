@@ -5,6 +5,12 @@ export const MapBlock: ComponentConfig = {
     address: {
       type: "text",
     },
+    latitude: {
+      type: "text",
+    },
+    longitude: {
+      type: "text",
+    },
     height: {
       type: "select",
       options: [
@@ -16,11 +22,17 @@ export const MapBlock: ComponentConfig = {
   },
   defaultProps: {
     address: "1600 Amphitheatre Parkway, Mountain View, CA",
+    latitude: "37.4220",
+    longitude: "-122.0841",
     height: "400",
   },
-  render: ({ address, height }) => {
+  render: ({ address, latitude, longitude, height }) => {
+    const lat = parseFloat(latitude);
+    const lon = parseFloat(longitude);
     const encodedAddress = encodeURIComponent(address);
-    const mapUrl = `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodedAddress}`;
+    // Create bounding box around the point (roughly 0.01 degrees = ~1km)
+    const bbox = `${lon - 0.01},${lat - 0.01},${lon + 0.01},${lat + 0.01}`;
+    const mapUrl = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${lat},${lon}`;
 
     return (
       <div className="bg-gradient-to-br from-p1-secondary to-black py-24 px-p1-xl">
@@ -77,7 +89,7 @@ export const MapBlock: ComponentConfig = {
             {/* Action buttons */}
             <div className="flex flex-wrap gap-p1-sm justify-center">
               <a
-                href={`https://www.google.com/maps/search/?api=1&query=${encodedAddress}`}
+                href={`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=15/${lat}/${lon}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-p1-xs px-p1-lg py-p1-sm bg-gradient-to-r from-p1-warning to-p1-error text-white font-bold rounded-p1-md hover:scale-105 transform transition-all shadow-lg"
@@ -85,7 +97,7 @@ export const MapBlock: ComponentConfig = {
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                 </svg>
-                Get Directions
+                View on OpenStreetMap
               </a>
               <button className="inline-flex items-center gap-p1-xs px-p1-lg py-p1-sm border-2 border-white/20 text-white font-bold rounded-p1-md hover:bg-white/10 transition-all">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,7 +108,7 @@ export const MapBlock: ComponentConfig = {
             </div>
 
             <p className="text-xs text-white/40 text-center italic">
-              Note: Google Maps API key required for production use
+              Powered by OpenStreetMap - Find coordinates at openstreetmap.org
             </p>
           </div>
         </div>
