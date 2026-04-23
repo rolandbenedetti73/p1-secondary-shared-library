@@ -11,6 +11,12 @@ const config: StorybookConfig = {
     "@storybook/addon-a11y",
     "@storybook/addon-docs"
   ],
-  "framework": "@storybook/react-vite"
+  "framework": "@storybook/react-vite",
+  viteFinal: async (config) => {
+    config.base = process.env.GITHUB_ACTIONS
+      ? '/p1-secondary-shared-library/'
+      : '/';
+    return config;
+  },
 };
 export default config;
