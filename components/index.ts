@@ -8,14 +8,22 @@ export { TestBlock } from "./test";
 export { SecondTestBlock } from "./second-test";
 
 // Export category configuration for this library
+// These categories will appear in the Puck component drawer
 export const secondaryLibraryCategories: Config["categories"] = {
-  "Hero & Marketing": {
-    components: ["HeroBlock", "TestimonialBlock"],
+  "🎯 Marketing": {
+    components: ["HeroBlock"],
+    title: "Marketing",
   },
-  "Interactive": {
+  "💬 Social Proof": {
+    components: ["TestimonialBlock"],
+    title: "Social Proof",
+  },
+  "🗺️ Location": {
     components: ["MapBlock"],
+    title: "Location",
   },
-  "Testing": {
+  "🧪 Development": {
     components: ["TestBlock", "SecondTestBlock"],
+    title: "Development",
   },
 };
