@@ -1,71 +1,43 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { HeroBlock } from '../components/hero';
+import type { Meta, StoryObj } from "@storybook/react";
+import { HeroBlock, type HeroProps } from "../components/hero";
 
-const HeroWrapper = ({ title, subtitle, imageUrl, ctaText, ctaLink }: any) => {
-  const Component = HeroBlock.render as any;
-  return <Component title={title} subtitle={subtitle} imageUrl={imageUrl} ctaText={ctaText} ctaLink={ctaLink} />;
+const HeroWrapper = (props: HeroProps) => {
+  const Component = HeroBlock.render as React.FC<HeroProps>;
+  return <Component {...props} />;
 };
 
 const meta = {
-  title: 'Components/HeroBlock',
+  title: "Attention/HeroBlock",
   component: HeroWrapper,
-  parameters: {
-    layout: 'fullwidth',
-  },
-  tags: ['autodocs'],
+  parameters: { layout: "fullwidth" },
+  tags: ["autodocs"],
   argTypes: {
-    title: {
-      control: 'text',
-      description: 'Main heading text',
-    },
-    subtitle: {
-      control: 'text',
-      description: 'Supporting text below the heading',
-    },
-    imageUrl: {
-      control: 'text',
-      description: 'Hero image URL',
-    },
-    ctaText: {
-      control: 'text',
-      description: 'Call-to-action button text',
-    },
-    ctaLink: {
-      control: 'text',
-      description: 'Call-to-action button URL',
-    },
+    tone: { control: "select", options: ["indigo", "purple", "dark", "light"] },
+    layout: { control: "select", options: ["split", "full", "text"] },
+    align: { control: "radio", options: ["left", "center"] },
+    imageSide: { control: "radio", options: ["right", "left"] },
   },
 } satisfies Meta<typeof HeroWrapper>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {
-    title: 'Transform Your Business',
-    subtitle: 'Innovative solutions for modern challenges. We help companies scale with cutting-edge technology.',
-    imageUrl: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=600&fit=crop',
-    ctaText: 'Get Started',
-    ctaLink: '#',
-  },
+const base: HeroProps = {
+  eyebrow: "New — now available",
+  title: "Your big idea, beautifully online.",
+  description:
+    "A flexible starting point for your next page. Swap in your own headline, story, and imagery — this layout adapts to whatever you publish.",
+  primaryCta: "Start free trial",
+  primaryHref: "#",
+  secondaryCta: "Book a demo →",
+  secondaryHref: "#",
+  tone: "indigo",
+  layout: "split",
+  align: "left",
+  imageUrl: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80",
+  imageSide: "right",
 };
 
-export const ProductLaunch: Story = {
-  args: {
-    title: 'Introducing Our New Platform',
-    subtitle: 'Built for speed, designed for scale. Experience the next generation of cloud infrastructure.',
-    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop',
-    ctaText: 'Learn More',
-    ctaLink: '#',
-  },
-};
-
-export const ServiceOffering: Story = {
-  args: {
-    title: 'Expert Consulting Services',
-    subtitle: 'Strategic guidance from industry leaders. Transform your vision into reality with our proven methodology.',
-    imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=600&fit=crop',
-    ctaText: 'Schedule Consultation',
-    ctaLink: '#',
-  },
-};
+export const Split: Story = { args: { ...base } };
+export const FullImage: Story = { args: { ...base, layout: "full", align: "left" } };
+export const TextOnly: Story = { args: { ...base, layout: "text", tone: "light", align: "center" } };
