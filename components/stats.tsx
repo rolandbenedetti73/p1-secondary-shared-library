@@ -4,7 +4,6 @@ export interface StatItem {
   value: string;
   label: string;
 }
-
 export interface StatsProps {
   tone: "light" | "dark";
   items: StatItem[];
@@ -21,10 +20,7 @@ export const StatsBlock: ComponentConfig<StatsProps> = {
     },
     items: {
       type: "array",
-      arrayFields: {
-        value: { type: "text" },
-        label: { type: "text" },
-      },
+      arrayFields: { value: { type: "text" }, label: { type: "text" } },
       defaultItemProps: { value: "100%", label: "Metric" },
       getItemSummary: (item) => item.value || "Stat",
     },
@@ -40,20 +36,17 @@ export const StatsBlock: ComponentConfig<StatsProps> = {
   },
   render: ({ tone, items }) => {
     const dark = tone === "dark";
+    const cols = Math.min(4, (items || []).length || 1);
     return (
       <div className={`px-p1-lg py-p1-xl ${dark ? "bg-gray-900" : "bg-p1-bg-light"}`}>
-        <div className="mx-auto grid max-w-7xl gap-p1-lg sm:grid-cols-2 lg:grid-cols-4">
-          {(items || []).map((item, i) => (
+        <div className="mx-auto grid max-w-6xl gap-p1-lg" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
+          {(items || []).map((it, i) => (
             <div key={i} className="text-center">
-              <div
-                className={`text-4xl font-extrabold tracking-tight md:text-5xl ${
-                  dark ? "text-p1-warning" : "text-p1-primary"
-                }`}
-              >
-                {item.value}
+              <div className={`text-4xl font-extrabold tracking-tight md:text-5xl ${dark ? "text-p1-warning" : "text-p1-primary"}`}>
+                {it.value}
               </div>
-              <div className={`mt-p1-sm text-sm ${dark ? "text-white/70" : "text-p1-text-muted"}`}>
-                {item.label}
+              <div className={`mt-p1-sm text-sm font-medium ${dark ? "text-white/70" : "text-p1-text-muted"}`}>
+                {it.label}
               </div>
             </div>
           ))}

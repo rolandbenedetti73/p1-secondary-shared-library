@@ -24,11 +24,10 @@ const base: TestimonialProps = {
   quote: "The team was up and running in a day, and we haven’t looked back. It just works.",
   name: "Jordan Ellis",
   role: "Operations Lead",
-  avatarUrl: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80",
+  avatarSrc: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=80",
   layout: "centered",
   tone: "light",
 };
 
 export const Centered: Story = { args: { ...base } };
-export const Large: Story = { args: { ...base, layout: "large", tone: "purple" } };
-export const Dark: Story = { args: { ...base, tone: "dark" } };
+export const Purple: Story = { args: { ...base, layout: "large", tone: "purple" } };

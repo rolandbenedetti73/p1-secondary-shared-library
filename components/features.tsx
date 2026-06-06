@@ -5,61 +5,59 @@ export interface FeatureCard {
   title: string;
   body: string;
 }
-
 export interface FeatureCardsProps {
-  eyebrow: string;
+  subtitle: string;
   heading: string;
   cards: FeatureCard[];
   columns: "2" | "3" | "4";
-  colorScheme: "brand-mix" | "light" | "purple" | "dark" | "outline";
+  colorScheme: "brand mix" | "light" | "purple" | "dark" | "outline";
+  corners: "sharp" | "soft" | "round";
+  depth: "flat" | "subtle" | "raised";
+  cardAlign: "left" | "center";
   sectionBg: "light" | "white" | "dark" | "none";
 }
 
-const COL_CLASS: Record<FeatureCardsProps["columns"], string> = {
-  "2": "md:grid-cols-2",
-  "3": "md:grid-cols-3",
-  "4": "md:grid-cols-2 lg:grid-cols-4",
-};
-
-const MIX = [
-  { card: "bg-p1-primary text-white", sub: "text-p1-warning" },
-  { card: "bg-p1-bg-default text-p1-text border border-p1-border", sub: "text-p1-primary" },
-  { card: "bg-gray-900 text-white", sub: "text-p1-warning" },
+interface CardStyle {
+  wrap: string;
+  title: string;
+  body: string;
+  sub: string;
+}
+const MIX: CardStyle[] = [
+  { wrap: "bg-p1-primary", title: "text-white", body: "text-white/90", sub: "text-p1-warning" },
+  { wrap: "bg-white border border-p1-border", title: "text-p1-text", body: "text-p1-text-muted", sub: "text-p1-primary" },
+  { wrap: "bg-gray-900", title: "text-white", body: "text-white/85", sub: "text-p1-warning" },
 ];
-
-function cardStyle(scheme: FeatureCardsProps["colorScheme"], i: number) {
+function schemeFor(scheme: FeatureCardsProps["colorScheme"], i: number): CardStyle {
   switch (scheme) {
-    case "light":
-      return { card: "bg-p1-bg-default text-p1-text border border-p1-border", sub: "text-p1-primary" };
-    case "purple":
-      return { card: "bg-p1-primary text-white", sub: "text-p1-warning" };
-    case "dark":
-      return { card: "bg-gray-900 text-white", sub: "text-p1-warning" };
-    case "outline":
-      return { card: "bg-transparent text-p1-text border border-p1-border", sub: "text-p1-primary" };
-    default:
+    case "brand mix":
       return MIX[i % 3];
+    case "purple":
+      return { wrap: "bg-p1-primary", title: "text-white", body: "text-white/90", sub: "text-p1-warning" };
+    case "dark":
+      return { wrap: "bg-gray-900", title: "text-white", body: "text-white/85", sub: "text-p1-warning" };
+    case "outline":
+      return { wrap: "bg-transparent border-[1.5px] border-gray-300", title: "text-p1-text", body: "text-p1-text-muted", sub: "text-p1-primary" };
+    default:
+      return { wrap: "bg-white border border-p1-border", title: "text-p1-text", body: "text-p1-text-muted", sub: "text-p1-primary" };
   }
 }
-
+const CORNERS: Record<FeatureCardsProps["corners"], string> = { sharp: "rounded-lg", soft: "rounded-2xl", round: "rounded-3xl" };
+const DEPTH: Record<FeatureCardsProps["depth"], string> = { flat: "", subtle: "shadow-md", raised: "shadow-xl" };
 const SECTION_BG: Record<FeatureCardsProps["sectionBg"], string> = {
   light: "bg-p1-bg-light",
-  white: "bg-p1-bg-default",
+  white: "bg-white",
   dark: "bg-gray-900",
-  none: "",
+  none: "bg-transparent",
 };
 
 export const FeatureCardsBlock: ComponentConfig<FeatureCardsProps> = {
   fields: {
-    eyebrow: { type: "text" },
+    subtitle: { type: "text" },
     heading: { type: "text" },
     cards: {
       type: "array",
-      arrayFields: {
-        eyebrow: { type: "text" },
-        title: { type: "text" },
-        body: { type: "textarea" },
-      },
+      arrayFields: { eyebrow: { type: "text" }, title: { type: "text" }, body: { type: "textarea" } },
       defaultItemProps: { eyebrow: "Eyebrow", title: "Feature", body: "Describe the feature." },
       getItemSummary: (item) => item.title || "Card",
     },
@@ -74,11 +72,34 @@ export const FeatureCardsBlock: ComponentConfig<FeatureCardsProps> = {
     colorScheme: {
       type: "select",
       options: [
-        { label: "Brand mix", value: "brand-mix" },
+        { label: "Brand mix", value: "brand mix" },
         { label: "Light", value: "light" },
         { label: "Purple", value: "purple" },
         { label: "Dark", value: "dark" },
         { label: "Outline", value: "outline" },
+      ],
+    },
+    corners: {
+      type: "select",
+      options: [
+        { label: "Sharp", value: "sharp" },
+        { label: "Soft", value: "soft" },
+        { label: "Round", value: "round" },
+      ],
+    },
+    depth: {
+      type: "select",
+      options: [
+        { label: "Flat", value: "flat" },
+        { label: "Subtle", value: "subtle" },
+        { label: "Raised", value: "raised" },
+      ],
+    },
+    cardAlign: {
+      type: "radio",
+      options: [
+        { label: "Left", value: "left" },
+        { label: "Center", value: "center" },
       ],
     },
     sectionBg: {
@@ -92,7 +113,7 @@ export const FeatureCardsBlock: ComponentConfig<FeatureCardsProps> = {
     },
   },
   defaultProps: {
-    eyebrow: "Why teams choose us",
+    subtitle: "Why teams choose us",
     heading: "Everything you need, in one place.",
     cards: [
       { eyebrow: "Simple", title: "Easy to use", body: "A visual editor anyone on your team can pick up in minutes — no training required." },
@@ -100,18 +121,24 @@ export const FeatureCardsBlock: ComponentConfig<FeatureCardsProps> = {
       { eyebrow: "Reliable", title: "Always on", body: "Fast, secure, and dependable — so you can focus on your content, not your infrastructure." },
     ],
     columns: "3",
-    colorScheme: "brand-mix",
+    colorScheme: "brand mix",
+    corners: "round",
+    depth: "flat",
+    cardAlign: "left",
     sectionBg: "light",
   },
-  render: ({ eyebrow, heading, cards, columns, colorScheme, sectionBg }) => {
+  render: ({ subtitle, heading, cards, columns, colorScheme, corners, depth, cardAlign, sectionBg }) => {
     const onDarkSection = sectionBg === "dark";
+    const center = cardAlign === "center";
+    const list = cards || [];
+    const cols = Math.min(Number(columns) || 3, list.length || 1);
     return (
       <div className={`px-p1-lg py-p1-xl ${SECTION_BG[sectionBg]}`}>
         <div className="mx-auto max-w-7xl">
           <div className="mb-p1-xl text-center">
-            {eyebrow && (
-              <p className={`mb-p1-sm font-serif text-xl italic ${onDarkSection ? "text-p1-warning" : "text-p1-primary"}`}>
-                {eyebrow}
+            {subtitle && (
+              <p className={`mb-p1-xs font-serif text-xl italic ${onDarkSection ? "text-p1-warning" : "text-p1-primary"}`}>
+                {subtitle}
               </p>
             )}
             {heading && (
@@ -120,21 +147,21 @@ export const FeatureCardsBlock: ComponentConfig<FeatureCardsProps> = {
               </h2>
             )}
           </div>
-          <div className={`grid gap-p1-md ${COL_CLASS[columns]}`}>
-            {(cards || []).map((card, i) => {
-              const s = cardStyle(colorScheme, i);
+          <div className="grid grid-cols-1 gap-p1-md" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
+            {list.map((c, i) => {
+              const s = schemeFor(colorScheme, i);
               return (
                 <div
                   key={i}
-                  className={`flex min-h-[15rem] flex-col gap-p1-sm rounded-p1-lg p-p1-lg ${s.card}`}
+                  className={`flex min-h-[15rem] flex-col gap-p1-sm p-p1-lg ${s.wrap} ${CORNERS[corners]} ${DEPTH[depth]} ${
+                    center ? "items-center text-center" : "items-stretch text-left"
+                  }`}
                 >
-                  {card.eyebrow && (
-                    <div className={`text-xs font-bold uppercase tracking-[0.14em] ${s.sub}`}>
-                      {card.eyebrow}
-                    </div>
+                  {c.eyebrow != null && c.eyebrow !== "" && (
+                    <div className={`text-xs font-bold uppercase tracking-[0.14em] ${s.sub}`}>{c.eyebrow}</div>
                   )}
-                  <h3 className="text-xl font-bold leading-snug">{card.title}</h3>
-                  <p className="text-sm leading-relaxed opacity-90">{card.body}</p>
+                  <h3 className={`text-xl font-bold leading-snug ${s.title}`}>{c.title}</h3>
+                  <p className={`text-[15px] leading-relaxed ${s.body}`}>{c.body}</p>
                 </div>
               );
             })}

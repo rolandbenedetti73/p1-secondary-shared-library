@@ -1,4 +1,5 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { Btn, type BtnVariant } from "./btn";
 
 export interface LeadCaptureProps {
   heading: string;
@@ -10,34 +11,18 @@ export interface LeadCaptureProps {
   layout: "inline" | "stacked";
 }
 
-const TONES: Record<
-  LeadCaptureProps["tone"],
-  { wrap: string; sub: string; field: string; button: string }
-> = {
-  light: {
-    wrap: "bg-p1-bg-light text-p1-text",
-    sub: "text-p1-text-muted",
-    field: "bg-p1-bg-default border-p1-border text-p1-text-muted",
-    button: "bg-p1-primary text-white",
-  },
-  purple: {
-    wrap: "bg-p1-primary text-white",
-    sub: "text-white/80",
-    field: "bg-white/10 border-white/25 text-white/60",
-    button: "bg-p1-warning text-p1-text",
-  },
-  dark: {
-    wrap: "bg-gray-900 text-white",
-    sub: "text-white/70",
-    field: "bg-white/10 border-white/20 text-white/60",
-    button: "bg-p1-warning text-p1-text",
-  },
-  yellow: {
-    wrap: "bg-p1-warning text-p1-text",
-    sub: "text-p1-primary",
-    field: "bg-white border-black/10 text-p1-text-muted",
-    button: "bg-p1-text text-white",
-  },
+interface LeadTone {
+  wrap: string;
+  onDark: boolean;
+  btn: BtnVariant;
+  sub: string;
+  field: string;
+}
+const TONES: Record<LeadCaptureProps["tone"], LeadTone> = {
+  light: { wrap: "bg-p1-bg-light text-p1-text", onDark: false, btn: "purple", sub: "text-p1-text-muted", field: "bg-white border-p1-border" },
+  purple: { wrap: "bg-p1-primary text-white", onDark: true, btn: "yellow", sub: "text-white/80", field: "bg-white/15 border-white/25" },
+  dark: { wrap: "bg-gray-900 text-white", onDark: true, btn: "yellow", sub: "text-white/70", field: "bg-white/10 border-white/20" },
+  yellow: { wrap: "bg-p1-warning text-p1-text", onDark: false, btn: "primary", sub: "text-p1-primary", field: "bg-white border-black/10" },
 };
 
 export const LeadCaptureBlock: ComponentConfig<LeadCaptureProps> = {
@@ -78,26 +63,18 @@ export const LeadCaptureBlock: ComponentConfig<LeadCaptureProps> = {
     const inline = layout === "inline";
     return (
       <div className="px-p1-lg py-p1-md">
-        <div className={`mx-auto max-w-5xl rounded-p1-lg px-p1-xl py-p1-xl text-center ${t.wrap}`}>
-          <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">{heading}</h2>
-          {subtitle && <p className={`mx-auto mt-p1-sm max-w-xl ${t.sub}`}>{subtitle}</p>}
-          <div
-            className={`mx-auto mt-p1-lg flex gap-p1-sm ${
-              inline ? "max-w-md flex-row" : "max-w-sm flex-col"
-            }`}
-          >
-            <div
-              className={`flex flex-1 items-center rounded-full border px-p1-md py-p1-sm text-left text-sm ${t.field}`}
-            >
+        <div className={`mx-auto max-w-7xl rounded-3xl px-p1-lg py-p1-xl text-center ${t.wrap}`}>
+          <h2 className="mb-p1-sm text-3xl font-extrabold tracking-tight md:text-4xl">{heading}</h2>
+          {subtitle && <p className={`mx-auto mb-p1-lg max-w-xl ${t.sub}`}>{subtitle}</p>}
+          <div className={`mx-auto flex items-stretch gap-2.5 ${inline ? "max-w-md flex-row" : "max-w-sm flex-col"}`}>
+            <div className={`flex flex-1 items-center rounded-full border px-4 py-3 text-left text-sm ${t.field} ${t.onDark ? "text-white/60" : "text-gray-400"}`}>
               {placeholder}
             </div>
-            <button
-              className={`inline-flex items-center justify-center rounded-full px-p1-lg py-p1-sm font-bold ${t.button}`}
-            >
+            <Btn variant={t.btn} className={inline ? "" : "justify-center"}>
               {buttonLabel}
-            </button>
+            </Btn>
           </div>
-          {note && <div className={`mt-p1-sm text-xs ${t.sub}`}>{note}</div>}
+          {note && <div className={`mt-p1-sm text-xs font-medium ${t.sub}`}>{note}</div>}
         </div>
       </div>
     );

@@ -5,7 +5,6 @@ export interface CardGridItem {
   subtitle: string;
   imageUrl: string;
 }
-
 export interface CardGridProps {
   heading: string;
   columns: "2" | "3" | "4";
@@ -56,18 +55,13 @@ export const CardGridBlock: ComponentConfig<CardGridProps> = {
   render: ({ heading, columns, items }) => (
     <div className="mx-auto max-w-7xl px-p1-lg py-p1-xl">
       {heading && (
-        <h3 className="mb-p1-xl text-center text-3xl font-bold tracking-tight text-p1-text">
-          {heading}
-        </h3>
+        <h3 className="mb-p1-xl text-center text-3xl font-bold tracking-tight text-p1-text">{heading}</h3>
       )}
-      <div className={`grid gap-p1-md ${COL_CLASS[columns]}`}>
+      <div className={`grid grid-cols-1 gap-p1-md ${COL_CLASS[columns]}`}>
         {(items || []).map((item, i) => (
-          <div
-            key={i}
-            className="overflow-hidden rounded-p1-lg border border-p1-border bg-p1-bg-default shadow-sm"
-          >
+          <div key={i} className="overflow-hidden rounded-p1-lg border border-p1-border bg-p1-bg-default shadow-sm">
             {item.imageUrl && (
-              <div className="aspect-[4/3] overflow-hidden bg-p1-bg-light">
+              <div className="aspect-[4/3] overflow-hidden bg-gray-100">
                 <img src={item.imageUrl} alt="" className="h-full w-full object-cover" />
               </div>
             )}

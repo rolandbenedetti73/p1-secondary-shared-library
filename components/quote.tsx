@@ -1,4 +1,5 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { inline } from "./prose";
 
 export interface QuoteProps {
   quote: string;
@@ -20,7 +21,7 @@ export const QuoteBlock: ComponentConfig<QuoteProps> = {
   },
   defaultProps: {
     quote:
-      "Switching over was the easiest call we made all year — our team ships in hours, not weeks now.",
+      "Switching over was the easiest call we made all year — ==our team ships in hours, not weeks== now.",
     attribution: "Jordan Ellis, Operations Lead",
     scale: "standard",
   },
@@ -28,13 +29,11 @@ export const QuoteBlock: ComponentConfig<QuoteProps> = {
     if (scale === "display") {
       return (
         <div className="mx-auto max-w-6xl px-p1-lg py-p1-xl">
-          <blockquote className="mx-auto max-w-4xl text-center">
-            <p className="font-serif text-3xl md:text-4xl font-medium italic leading-snug text-p1-text text-balance">
-              “{quote}”
+          <blockquote className="mx-auto max-w-3xl text-center">
+            <p className="mb-p1-md font-serif text-3xl font-medium italic leading-snug text-balance text-p1-text md:text-4xl">
+              “{inline(quote)}”
             </p>
-            <cite className="mt-p1-lg block not-italic font-semibold text-p1-primary">
-              — {attribution}
-            </cite>
+            <cite className="font-semibold not-italic text-p1-primary">— {attribution}</cite>
           </blockquote>
         </div>
       );
@@ -42,12 +41,10 @@ export const QuoteBlock: ComponentConfig<QuoteProps> = {
     return (
       <div className="mx-auto max-w-6xl px-p1-lg py-p1-lg">
         <blockquote className="border-l-4 border-p1-warning pl-p1-lg">
-          <p className="font-serif text-2xl font-medium italic leading-snug text-p1-text text-balance">
-            “{quote}”
+          <p className="mb-p1-sm font-serif text-2xl font-medium italic leading-snug text-balance text-p1-text">
+            “{inline(quote)}”
           </p>
-          <cite className="mt-p1-md block not-italic font-semibold text-p1-primary">
-            — {attribution}
-          </cite>
+          <cite className="font-semibold not-italic text-p1-primary">— {attribution}</cite>
         </blockquote>
       </div>
     );

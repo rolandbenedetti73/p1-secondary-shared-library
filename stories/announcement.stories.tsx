@@ -23,11 +23,9 @@ type Story = StoryObj<typeof meta>;
 const base: AnnouncementProps = {
   text: "Something new just launched — take a look.",
   linkLabel: "Read the announcement →",
-  linkHref: "#",
   tone: "purple",
   align: "center",
 };
 
 export const Purple: Story = { args: { ...base } };
-export const Yellow: Story = { args: { ...base, tone: "yellow" } };
 export const Gradient: Story = { args: { ...base, tone: "gradient" } };

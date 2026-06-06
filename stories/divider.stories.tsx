@@ -12,7 +12,7 @@ const meta = {
   parameters: { layout: "fullwidth" },
   tags: ["autodocs"],
   argTypes: {
-    variant: { control: "select", options: ["solid", "dashed", "dots"] },
+    style: { control: "select", options: ["solid", "dashed", "dots"] },
     spacing: { control: "select", options: ["small", "medium", "large"] },
   },
 } satisfies Meta<typeof DividerWrapper>;
@@ -20,6 +20,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Solid: Story = { args: { variant: "solid", spacing: "medium" } };
-export const Dashed: Story = { args: { variant: "dashed", spacing: "medium" } };
-export const Dots: Story = { args: { variant: "dots", spacing: "large" } };
+export const Solid: Story = { args: { style: "solid", spacing: "medium" } };
+export const Dots: Story = { args: { style: "dots", spacing: "medium" } };

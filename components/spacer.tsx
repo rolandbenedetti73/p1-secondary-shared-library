@@ -4,11 +4,11 @@ export interface SpacerProps {
   size: "small" | "medium" | "large" | "x-large";
 }
 
-const HEIGHTS: Record<SpacerProps["size"], string> = {
-  small: "h-6",
-  medium: "h-12",
-  large: "h-20",
-  "x-large": "h-32",
+const HEIGHT: Record<SpacerProps["size"], number> = {
+  small: 24,
+  medium: 48,
+  large: 80,
+  "x-large": 128,
 };
 
 export const SpacerBlock: ComponentConfig<SpacerProps> = {
@@ -24,5 +24,5 @@ export const SpacerBlock: ComponentConfig<SpacerProps> = {
     },
   },
   defaultProps: { size: "medium" },
-  render: ({ size }) => <div className={HEIGHTS[size]} aria-hidden="true" />,
+  render: ({ size }) => <div style={{ height: HEIGHT[size] }} />,
 };

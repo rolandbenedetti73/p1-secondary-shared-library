@@ -30,8 +30,7 @@ const base: FeatureMediaProps = {
     { text: "Publish in one click" },
   ],
   buttonLabel: "See how it works →",
-  buttonHref: "#",
-  imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1000&q=80",
+  imageSrc: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1000&q=80",
   mediaSide: "right",
   tone: "white",
 };

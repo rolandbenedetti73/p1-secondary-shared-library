@@ -12,8 +12,6 @@ const meta = {
   parameters: { layout: "fullwidth" },
   tags: ["autodocs"],
   argTypes: {
-    label: { control: "text" },
-    href: { control: "text" },
     variant: { control: "select", options: ["primary", "secondary", "yellow", "purple"] },
     align: { control: "radio", options: ["left", "center"] },
   },
@@ -24,4 +22,3 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = { args: { label: "Get started", href: "#", variant: "primary", align: "left" } };
 export const Yellow: Story = { args: { label: "Start free trial", href: "#", variant: "yellow", align: "center" } };
-export const Purple: Story = { args: { label: "Book a demo", href: "#", variant: "purple", align: "left" } };

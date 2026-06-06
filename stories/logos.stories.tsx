@@ -11,7 +11,10 @@ const meta = {
   component: LogoCloudWrapper,
   parameters: { layout: "fullwidth" },
   tags: ["autodocs"],
-  argTypes: { heading: { control: "text" } },
+  argTypes: {
+    style: { control: "radio", options: ["mono", "color"] },
+    height: { control: "select", options: ["small", "medium", "large"] },
+  },
 } satisfies Meta<typeof LogoCloudWrapper>;
 
 export default meta;
@@ -20,12 +23,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     heading: "Featured in",
+    style: "mono",
+    height: "medium",
     logos: [
-      { label: "NPR" },
-      { label: "PBS" },
-      { label: "THE ATLANTIC" },
-      { label: "REUTERS" },
-      { label: "NATURE" },
+      { src: "", label: "NPR" },
+      { src: "", label: "PBS" },
+      { src: "", label: "REUTERS" },
+      { src: "", label: "NATURE" },
     ],
   },
 };

@@ -31,4 +31,4 @@ const base: LeadCaptureProps = {
 };
 
 export const Purple: Story = { args: { ...base } };
-export const Yellow: Story = { args: { ...base, tone: "yellow" } };
+export const LightStacked: Story = { args: { ...base, tone: "light", layout: "stacked" } };

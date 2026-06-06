@@ -1,23 +1,23 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { Btn } from "./btn";
+import { Icon } from "./icons";
 
-export interface MediaBullet {
+export interface FeatureMediaBullet {
   text: string;
 }
-
 export interface FeatureMediaProps {
   eyebrow: string;
   title: string;
   body: string;
-  bullets: MediaBullet[];
+  bullets: FeatureMediaBullet[];
   buttonLabel: string;
-  buttonHref: string;
-  imageUrl: string;
+  imageSrc: string;
   mediaSide: "right" | "left";
   tone: "white" | "light" | "dark";
 }
 
 const TONES: Record<FeatureMediaProps["tone"], { wrap: string; onDark: boolean }> = {
-  white: { wrap: "bg-p1-bg-default text-p1-text", onDark: false },
+  white: { wrap: "bg-white text-p1-text", onDark: false },
   light: { wrap: "bg-p1-bg-light text-p1-text", onDark: false },
   dark: { wrap: "bg-gray-900 text-white", onDark: true },
 };
@@ -34,8 +34,7 @@ export const FeatureMediaBlock: ComponentConfig<FeatureMediaProps> = {
       getItemSummary: (item) => item.text || "Bullet",
     },
     buttonLabel: { type: "text" },
-    buttonHref: { type: "text" },
-    imageUrl: { type: "text" },
+    imageSrc: { type: "text" },
     mediaSide: {
       type: "radio",
       options: [
@@ -62,16 +61,16 @@ export const FeatureMediaBlock: ComponentConfig<FeatureMediaProps> = {
       { text: "Publish in one click" },
     ],
     buttonLabel: "See how it works →",
-    buttonHref: "#",
-    imageUrl: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1000&q=80",
+    imageSrc: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1000&q=80",
     mediaSide: "right",
     tone: "white",
   },
-  render: ({ eyebrow, title, body, bullets, buttonLabel, buttonHref, imageUrl, mediaSide, tone }) => {
+  render: ({ eyebrow, title, body, bullets, buttonLabel, imageSrc, mediaSide, tone }) => {
     const t = TONES[tone];
+    const imgFirst = mediaSide === "left";
     const media = (
-      <div className="overflow-hidden rounded-p1-lg border border-p1-border bg-p1-bg-light">
-        {imageUrl && <img src={imageUrl} alt="" className="aspect-[4/3] h-full w-full object-cover" />}
+      <div className={`aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100 ${t.onDark ? "border border-white/15" : "border border-p1-border"}`}>
+        {imageSrc && <img src={imageSrc} alt="" className="h-full w-full object-cover" />}
       </div>
     );
     const copy = (
@@ -81,38 +80,27 @@ export const FeatureMediaBlock: ComponentConfig<FeatureMediaProps> = {
             {eyebrow}
           </div>
         )}
-        <h2 className="text-3xl font-bold leading-tight tracking-tight text-balance md:text-4xl">{title}</h2>
-        <p className={`mt-p1-md text-lg leading-relaxed ${t.onDark ? "text-white/85" : "text-p1-text-muted"}`}>{body}</p>
+        <h2 className="mb-p1-sm text-3xl font-bold leading-tight tracking-tight text-balance md:text-4xl">{title}</h2>
+        <p className={`mb-p1-md text-lg leading-relaxed ${t.onDark ? "text-white/80" : "text-p1-text-muted"}`}>{body}</p>
         {(bullets || []).length > 0 && (
-          <ul className="mt-p1-md flex list-none flex-col gap-p1-sm p-0">
-            {bullets.map((b, i) => (
+          <ul className="mb-p1-lg flex list-none flex-col gap-p1-sm p-0">
+            {(bullets || []).map((b, i) => (
               <li key={i} className="flex items-center gap-p1-sm font-medium">
-                <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-p1-success/15 text-p1-success">
-                  <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth={3}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
+                <span className={`grid h-[22px] w-[22px] flex-none place-items-center rounded-full ${t.onDark ? "bg-p1-warning/20 text-p1-warning" : "bg-p1-success/10 text-p1-success"}`}>
+                  <Icon name="check" strokeWidth={2.4} className="h-3.5 w-3.5" />
                 </span>
                 {b.text}
               </li>
             ))}
           </ul>
         )}
-        {buttonLabel && (
-          <a
-            href={buttonHref}
-            className={`mt-p1-lg inline-flex items-center rounded-full px-p1-lg py-p1-sm font-bold ${
-              t.onDark ? "bg-p1-warning text-p1-text" : "bg-p1-text text-white"
-            }`}
-          >
-            {buttonLabel}
-          </a>
-        )}
+        {buttonLabel && <Btn variant={t.onDark ? "yellow" : "primary"}>{buttonLabel}</Btn>}
       </div>
     );
     return (
       <div className={`px-p1-lg py-p1-xl ${t.wrap}`}>
         <div className="mx-auto grid max-w-7xl items-center gap-p1-xl md:grid-cols-2">
-          {mediaSide === "left" ? (
+          {imgFirst ? (
             <>
               {media}
               {copy}

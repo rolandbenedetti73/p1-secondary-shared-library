@@ -12,8 +12,7 @@ const meta = {
   parameters: { layout: "fullwidth" },
   tags: ["autodocs"],
   argTypes: {
-    text: { control: "text" },
-    level: { control: "select", options: ["h1", "h2", "h3", "h4"] },
+    level: { control: "select", options: ["H1", "H2", "H3", "H4"] },
     align: { control: "radio", options: ["left", "center"] },
   },
 } satisfies Meta<typeof HeadingWrapper>;
@@ -21,10 +20,5 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: { text: "A heading to anchor the section", level: "h2", align: "left" },
-};
-
-export const DisplayCentered: Story = {
-  args: { text: "Everything you need, in one place.", level: "h1", align: "center" },
-};
+export const Default: Story = { args: { text: "A heading to anchor the section", level: "H2", align: "left" } };
+export const Centered: Story = { args: { text: "A centered headline", level: "H1", align: "center" } };

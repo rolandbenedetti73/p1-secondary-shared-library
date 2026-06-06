@@ -15,6 +15,8 @@ const meta = {
     layout: { control: "select", options: ["centered", "split"] },
     align: { control: "radio", options: ["left", "center"] },
     tone: { control: "select", options: ["yellow", "purple", "dark", "light", "gradient", "outline"] },
+    decoration: { control: "select", options: ["none", "glow", "dots"] },
+    corners: { control: "select", options: ["square", "soft", "round"] },
     padding: { control: "select", options: ["compact", "regular", "spacious"] },
   },
 } satisfies Meta<typeof CtaBannerWrapper>;
@@ -27,16 +29,15 @@ const base: CtaBannerProps = {
   title: "Ready to ship faster?",
   subtitle: "Start a free trial — no credit card, no deploy pipeline to wrangle.",
   buttonLabel: "Start free trial",
-  buttonHref: "#",
   secondaryLabel: "",
-  secondaryHref: "#",
   layout: "centered",
   align: "center",
   tone: "yellow",
+  decoration: "none",
+  corners: "round",
   padding: "regular",
 };
 
-export const Centered: Story = { args: { ...base } };
-export const SplitGradient: Story = {
-  args: { ...base, layout: "split", tone: "gradient", secondaryLabel: "Talk to sales" },
-};
+export const Yellow: Story = { args: { ...base } };
+export const Gradient: Story = { args: { ...base, tone: "gradient", decoration: "glow", secondaryLabel: "Talk to sales" } };
+export const Split: Story = { args: { ...base, tone: "dark", layout: "split", align: "left" } };

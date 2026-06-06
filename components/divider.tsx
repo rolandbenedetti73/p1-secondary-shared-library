@@ -1,11 +1,11 @@
 import { ComponentConfig } from "@puckeditor/core";
 
 export interface DividerProps {
-  variant: "solid" | "dashed" | "dots";
+  style: "solid" | "dashed" | "dots";
   spacing: "small" | "medium" | "large";
 }
 
-const SPACING: Record<DividerProps["spacing"], string> = {
+const PAD: Record<DividerProps["spacing"], string> = {
   small: "py-p1-sm",
   medium: "py-p1-lg",
   large: "py-p1-xl",
@@ -13,7 +13,7 @@ const SPACING: Record<DividerProps["spacing"], string> = {
 
 export const DividerBlock: ComponentConfig<DividerProps> = {
   fields: {
-    variant: {
+    style: {
       type: "select",
       options: [
         { label: "Solid", value: "solid" },
@@ -30,21 +30,17 @@ export const DividerBlock: ComponentConfig<DividerProps> = {
       ],
     },
   },
-  defaultProps: { variant: "solid", spacing: "medium" },
-  render: ({ variant, spacing }) => (
-    <div className={`mx-auto max-w-6xl px-p1-lg ${SPACING[spacing]}`}>
-      {variant === "dots" ? (
-        <div className="flex justify-center gap-2">
+  defaultProps: { style: "solid", spacing: "medium" },
+  render: ({ style, spacing }) => (
+    <div className={`mx-auto max-w-6xl px-p1-lg ${PAD[spacing]}`}>
+      {style === "dots" ? (
+        <div className="flex justify-center gap-2.5">
           {[0, 1, 2].map((i) => (
             <span key={i} className="h-1.5 w-1.5 rounded-full bg-p1-border" />
           ))}
         </div>
       ) : (
-        <hr
-          className={`m-0 border-0 border-t border-p1-border ${
-            variant === "dashed" ? "border-dashed border-t-2" : "border-solid"
-          }`}
-        />
+        <hr className={`m-0 border-0 border-t border-p1-border ${style === "dashed" ? "border-dashed border-t-2" : ""}`} />
       )}
     </div>
   ),

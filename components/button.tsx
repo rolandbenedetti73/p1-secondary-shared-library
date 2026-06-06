@@ -1,18 +1,12 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { Btn, type BtnVariant } from "./btn";
 
 export interface ButtonProps {
   label: string;
   href: string;
-  variant: "primary" | "secondary" | "yellow" | "purple";
+  variant: BtnVariant;
   align: "left" | "center";
 }
-
-const VARIANTS: Record<ButtonProps["variant"], string> = {
-  primary: "bg-p1-text text-white border border-p1-text hover:opacity-90",
-  secondary: "bg-white text-p1-text border border-p1-border hover:bg-p1-bg-light",
-  yellow: "bg-p1-warning text-p1-text border border-p1-warning hover:brightness-95",
-  purple: "bg-p1-primary text-white border border-p1-primary hover:opacity-90",
-};
 
 export const ButtonBlock: ComponentConfig<ButtonProps> = {
   fields: {
@@ -37,17 +31,10 @@ export const ButtonBlock: ComponentConfig<ButtonProps> = {
   },
   defaultProps: { label: "Get started", href: "#", variant: "primary", align: "left" },
   render: ({ label, href, variant, align }) => (
-    <div
-      className={`mx-auto flex max-w-6xl px-p1-lg py-p1-sm ${
-        align === "center" ? "justify-center" : "justify-start"
-      }`}
-    >
-      <a
-        href={href}
-        className={`inline-flex items-center rounded-full px-p1-lg py-p1-sm font-bold transition-all ${VARIANTS[variant]}`}
-      >
+    <div className={`mx-auto flex max-w-6xl px-p1-lg py-p1-sm ${align === "center" ? "justify-center" : "justify-start"}`}>
+      <Btn variant={variant} href={href || undefined}>
         {label}
-      </a>
+      </Btn>
     </div>
   ),
 };

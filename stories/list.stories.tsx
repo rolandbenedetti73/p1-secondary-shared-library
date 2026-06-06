@@ -11,9 +11,7 @@ const meta = {
   component: ListWrapper,
   parameters: { layout: "fullwidth" },
   tags: ["autodocs"],
-  argTypes: {
-    variant: { control: "select", options: ["check", "bullet", "numbered"] },
-  },
+  argTypes: { style: { control: "select", options: ["check", "bullet", "numbered"] } },
 } satisfies Meta<typeof ListWrapper>;
 
 export default meta;
@@ -26,6 +24,6 @@ const items = [
   { text: "Secure by default" },
 ];
 
-export const Check: Story = { args: { variant: "check", items } };
-export const Bullet: Story = { args: { variant: "bullet", items } };
-export const Numbered: Story = { args: { variant: "numbered", items } };
+export const Check: Story = { args: { style: "check", items } };
+export const Bullet: Story = { args: { style: "bullet", items } };
+export const Numbered: Story = { args: { style: "numbered", items } };

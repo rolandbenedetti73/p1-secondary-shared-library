@@ -11,29 +11,14 @@ const meta = {
   component: QuoteWrapper,
   parameters: { layout: "fullwidth" },
   tags: ["autodocs"],
-  argTypes: {
-    quote: { control: "text" },
-    attribution: { control: "text" },
-    scale: { control: "radio", options: ["standard", "display"] },
-  },
+  argTypes: { scale: { control: "radio", options: ["standard", "display"] } },
 } satisfies Meta<typeof QuoteWrapper>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Standard: Story = {
-  args: {
-    quote:
-      "Switching over was the easiest call we made all year — our team ships in hours, not weeks now.",
-    attribution: "Jordan Ellis, Operations Lead",
-    scale: "standard",
-  },
-};
+const quote =
+  "Switching over was the easiest call we made all year — ==our team ships in hours, not weeks== now.";
 
-export const Display: Story = {
-  args: {
-    quote: "It just works — and that has changed how our whole team operates.",
-    attribution: "Sarah Chen, CEO",
-    scale: "display",
-  },
-};
+export const Standard: Story = { args: { quote, attribution: "Jordan Ellis, Operations Lead", scale: "standard" } };
+export const Display: Story = { args: { quote, attribution: "Jordan Ellis, Operations Lead", scale: "display" } };

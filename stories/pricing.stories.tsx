@@ -22,9 +22,9 @@ export const Default: Story = {
     heading: "Plans that scale with your portfolio.",
     subtitle: "Start free. Upgrade when your team is ready.",
     tiers: [
-      { name: "Starter", price: "$0", period: "/mo", features: "1 project\nCore features\nCommunity support", buttonLabel: "Start free", buttonHref: "#", featured: "off" },
-      { name: "Team", price: "$49", period: "/mo", features: "Up to 10 projects\nAdvanced features\nRole-based access\nPriority support", buttonLabel: "Start free trial", buttonHref: "#", featured: "on" },
-      { name: "Enterprise", price: "Custom", period: "", features: "Unlimited sites\nBulk updates\nSSO & audit logs\nDedicated CSM", buttonLabel: "Contact sales", buttonHref: "#", featured: "off" },
+      { name: "Starter", price: "$0", period: "/mo", features: "1 project\nCore features\nCommunity support", buttonLabel: "Start free", featured: "off" },
+      { name: "Team", price: "$49", period: "/mo", features: "Up to 10 projects\nAdvanced features\nRole-based access\nPriority support", buttonLabel: "Start free trial", featured: "on" },
+      { name: "Enterprise", price: "Custom", period: "", features: "Unlimited sites\nBulk updates\nSSO & audit logs\nDedicated CSM", buttonLabel: "Contact sales", featured: "off" },
     ],
   },
 };

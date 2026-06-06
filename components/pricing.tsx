@@ -1,4 +1,6 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { Btn } from "./btn";
+import { Icon } from "./icons";
 
 export interface PricingTier {
   name: string;
@@ -6,10 +8,8 @@ export interface PricingTier {
   period: string;
   features: string;
   buttonLabel: string;
-  buttonHref: string;
   featured: "off" | "on";
 }
-
 export interface PricingProps {
   eyebrow: string;
   heading: string;
@@ -36,7 +36,6 @@ export const PricingBlock: ComponentConfig<PricingProps> = {
         period: { type: "text" },
         features: { type: "textarea" },
         buttonLabel: { type: "text" },
-        buttonHref: { type: "text" },
         featured: {
           type: "radio",
           options: [
@@ -45,15 +44,7 @@ export const PricingBlock: ComponentConfig<PricingProps> = {
           ],
         },
       },
-      defaultItemProps: {
-        name: "Plan",
-        price: "$0",
-        period: "/mo",
-        features: "Feature one\nFeature two",
-        buttonLabel: "Choose plan",
-        buttonHref: "#",
-        featured: "off",
-      },
+      defaultItemProps: { name: "Plan", price: "$0", period: "/mo", features: "Feature one\nFeature two", buttonLabel: "Choose plan", featured: "off" },
       getItemSummary: (item) => item.name || "Tier",
     },
   },
@@ -62,9 +53,9 @@ export const PricingBlock: ComponentConfig<PricingProps> = {
     heading: "Plans that scale with your portfolio.",
     subtitle: "Start free. Upgrade when your team is ready.",
     tiers: [
-      { name: "Starter", price: "$0", period: "/mo", features: "1 project\nCore features\nCommunity support", buttonLabel: "Start free", buttonHref: "#", featured: "off" },
-      { name: "Team", price: "$49", period: "/mo", features: "Up to 10 projects\nAdvanced features\nRole-based access\nPriority support", buttonLabel: "Start free trial", buttonHref: "#", featured: "on" },
-      { name: "Enterprise", price: "Custom", period: "", features: "Unlimited sites\nBulk updates\nSSO & audit logs\nDedicated CSM", buttonLabel: "Contact sales", buttonHref: "#", featured: "off" },
+      { name: "Starter", price: "$0", period: "/mo", features: "1 project\nCore features\nCommunity support", buttonLabel: "Start free", featured: "off" },
+      { name: "Team", price: "$49", period: "/mo", features: "Up to 10 projects\nAdvanced features\nRole-based access\nPriority support", buttonLabel: "Start free trial", featured: "on" },
+      { name: "Enterprise", price: "Custom", period: "", features: "Unlimited sites\nBulk updates\nSSO & audit logs\nDedicated CSM", buttonLabel: "Contact sales", featured: "off" },
     ],
   },
   render: ({ eyebrow, heading, subtitle, tiers }) => {
@@ -74,22 +65,17 @@ export const PricingBlock: ComponentConfig<PricingProps> = {
         <div className="mx-auto max-w-7xl">
           <div className="mb-p1-xl text-center">
             {eyebrow && <p className="mb-p1-sm font-serif text-xl italic text-p1-primary">{eyebrow}</p>}
-            {heading && <h2 className="text-3xl font-bold tracking-tight md:text-4xl text-p1-text">{heading}</h2>}
+            {heading && <h2 className="text-3xl font-bold tracking-tight text-p1-text md:text-4xl">{heading}</h2>}
             {subtitle && <p className="mt-p1-sm text-p1-text-muted">{subtitle}</p>}
           </div>
-          <div
-            className="grid items-start gap-p1-md"
-            style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
-          >
+          <div className="grid grid-cols-1 items-start gap-p1-md" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
             {(tiers || []).map((tier, i) => {
               const hot = tier.featured === "on";
               return (
                 <div
                   key={i}
                   className={`relative rounded-p1-lg p-p1-lg ${
-                    hot
-                      ? "-translate-y-2 bg-p1-primary text-white shadow-xl"
-                      : "border border-p1-border bg-p1-bg-default text-p1-text shadow-sm"
+                    hot ? "-translate-y-2 bg-p1-primary text-white shadow-xl" : "border border-p1-border bg-p1-bg-default text-p1-text shadow-sm"
                   }`}
                 >
                   {hot && (
@@ -98,28 +84,21 @@ export const PricingBlock: ComponentConfig<PricingProps> = {
                     </span>
                   )}
                   <div className="text-base font-bold">{tier.name}</div>
-                  <div className="mt-p1-sm mb-p1-md flex items-baseline gap-1">
+                  <div className="mb-p1-md mt-p1-sm flex items-baseline gap-1">
                     <span className="text-4xl font-extrabold tracking-tight">{tier.price}</span>
                     {tier.period && <span className="text-sm opacity-70">{tier.period}</span>}
                   </div>
                   <ul className="m-0 mb-p1-lg flex list-none flex-col gap-p1-sm p-0">
                     {splitLines(tier.features).map((f, j) => (
                       <li key={j} className="flex items-start gap-p1-sm text-sm">
-                        <svg viewBox="0 0 24 24" className={`mt-0.5 h-4 w-4 flex-none ${hot ? "text-p1-warning" : "text-p1-success"}`} fill="none" stroke="currentColor" strokeWidth={3}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
+                        <Icon name="check" strokeWidth={3} className={`mt-0.5 h-4 w-4 flex-none ${hot ? "text-p1-warning" : "text-p1-success"}`} />
                         <span className={hot ? "text-white/90" : "text-p1-text-muted"}>{f}</span>
                       </li>
                     ))}
                   </ul>
-                  <a
-                    href={tier.buttonHref}
-                    className={`inline-flex w-full items-center justify-center rounded-full px-p1-lg py-p1-sm font-bold ${
-                      hot ? "bg-p1-warning text-p1-text" : "border border-p1-border bg-p1-bg-default text-p1-text"
-                    }`}
-                  >
+                  <Btn variant={hot ? "yellow" : "secondary"} className="w-full justify-center">
                     {tier.buttonLabel}
-                  </a>
+                  </Btn>
                 </div>
               );
             })}

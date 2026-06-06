@@ -1,10 +1,10 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { Icon } from "./icons";
 
 export interface FaqItem {
   q: string;
   a: string;
 }
-
 export interface FaqProps {
   heading: string;
   items: FaqItem[];
@@ -15,10 +15,7 @@ export const FaqBlock: ComponentConfig<FaqProps> = {
     heading: { type: "text" },
     items: {
       type: "array",
-      arrayFields: {
-        q: { type: "text" },
-        a: { type: "textarea" },
-      },
+      arrayFields: { q: { type: "text" }, a: { type: "textarea" } },
       defaultItemProps: { q: "Question?", a: "Answer." },
       getItemSummary: (item) => item.q || "Question",
     },
@@ -35,18 +32,14 @@ export const FaqBlock: ComponentConfig<FaqProps> = {
     <div className="bg-p1-bg-default px-p1-lg py-p1-xl">
       <div className="mx-auto max-w-3xl">
         {heading && (
-          <h2 className="mb-p1-xl text-center text-3xl font-bold tracking-tight md:text-4xl text-p1-text">
-            {heading}
-          </h2>
+          <h2 className="mb-p1-xl text-center text-3xl font-bold tracking-tight text-p1-text md:text-4xl">{heading}</h2>
         )}
         <div className="border-t border-p1-border">
           {(items || []).map((item, i) => (
             <div key={i} className="border-b border-p1-border py-p1-md">
               <div className="flex items-start justify-between gap-p1-md">
                 <h3 className="text-lg font-bold leading-snug text-p1-text">{item.q}</h3>
-                <svg viewBox="0 0 24 24" className="mt-1 h-5 w-5 flex-none text-p1-text-muted" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14M5 12h14" />
-                </svg>
+                <Icon name="plus" className="mt-1 h-5 w-5 flex-none text-p1-text-muted" />
               </div>
               <p className="mt-p1-sm max-w-[92%] leading-relaxed text-p1-text-muted">{item.a}</p>
             </div>

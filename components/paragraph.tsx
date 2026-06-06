@@ -50,12 +50,8 @@ export const ParagraphBlock: ComponentConfig<ParagraphProps> = {
     return (
       <div className="mx-auto max-w-6xl px-p1-lg py-p1-sm">
         <p
-          className={`max-w-prose text-pretty leading-relaxed ${
-            align === "center" ? "mx-auto text-center" : "text-left"
-          } ${
-            lead
-              ? "font-serif text-xl md:text-2xl text-p1-text"
-              : `${BODY_SIZES[size]} text-p1-text-muted`
+          className={`max-w-prose text-pretty leading-relaxed ${align === "center" ? "mx-auto text-center" : "text-left"} ${
+            lead ? "font-serif text-xl md:text-2xl text-p1-text" : `${BODY_SIZES[size]} text-p1-text-muted`
           }`}
         >
           {text}

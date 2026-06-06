@@ -1,25 +1,29 @@
 import { ComponentConfig } from "@puckeditor/core";
+import { Btn } from "./btn";
 
 export interface HeroProps {
   eyebrow: string;
   title: string;
   description: string;
-  primaryCta: string;
-  primaryHref: string;
-  secondaryCta: string;
-  secondaryHref: string;
+  primaryLabel: string;
+  secondaryLabel: string;
   tone: "indigo" | "purple" | "dark" | "light";
-  layout: "split" | "full" | "text";
-  align: "left" | "center";
-  imageUrl: string;
+  layout: "split" | "full image" | "text only";
+  imageSrc: string;
   imageSide: "right" | "left";
+  imageFill: "card" | "flush";
+  splitRatio: "even" | "copy-wide" | "image-wide";
+  align: "left" | "center" | "right";
+  overlay: "none" | "scrim" | "gradient down" | "gradient right";
+  overlayStrength: "light" | "medium" | "heavy";
+  knockout: "off" | "on";
 }
 
 const TONES: Record<HeroProps["tone"], { wrap: string; onDark: boolean }> = {
-  indigo: { wrap: "bg-slate-800 text-white", onDark: true },
+  indigo: { wrap: "bg-indigo-900 text-white", onDark: true },
   purple: { wrap: "bg-p1-primary text-white", onDark: true },
   dark: { wrap: "bg-gray-900 text-white", onDark: true },
-  light: { wrap: "bg-gray-50 text-p1-text", onDark: false },
+  light: { wrap: "bg-p1-bg-light text-p1-text", onDark: false },
 };
 
 export const HeroBlock: ComponentConfig<HeroProps> = {
@@ -27,10 +31,8 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
     eyebrow: { type: "text" },
     title: { type: "text" },
     description: { type: "textarea" },
-    primaryCta: { type: "text" },
-    primaryHref: { type: "text" },
-    secondaryCta: { type: "text" },
-    secondaryHref: { type: "text" },
+    primaryLabel: { type: "text" },
+    secondaryLabel: { type: "text" },
     tone: {
       type: "select",
       options: [
@@ -44,23 +46,63 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
       type: "select",
       options: [
         { label: "Split", value: "split" },
-        { label: "Full image", value: "full" },
-        { label: "Text only", value: "text" },
+        { label: "Full image", value: "full image" },
+        { label: "Text only", value: "text only" },
       ],
     },
-    align: {
-      type: "radio",
-      options: [
-        { label: "Left", value: "left" },
-        { label: "Center", value: "center" },
-      ],
-    },
-    imageUrl: { type: "text" },
+    imageSrc: { type: "text" },
     imageSide: {
       type: "radio",
       options: [
         { label: "Right", value: "right" },
         { label: "Left", value: "left" },
+      ],
+    },
+    imageFill: {
+      type: "radio",
+      options: [
+        { label: "Card", value: "card" },
+        { label: "Flush", value: "flush" },
+      ],
+    },
+    splitRatio: {
+      type: "select",
+      options: [
+        { label: "Even", value: "even" },
+        { label: "Copy-wide", value: "copy-wide" },
+        { label: "Image-wide", value: "image-wide" },
+      ],
+    },
+    align: {
+      type: "select",
+      options: [
+        { label: "Left", value: "left" },
+        { label: "Center", value: "center" },
+        { label: "Right", value: "right" },
+      ],
+    },
+    overlay: {
+      type: "select",
+      options: [
+        { label: "None", value: "none" },
+        { label: "Scrim", value: "scrim" },
+        { label: "Gradient ↓", value: "gradient down" },
+        { label: "Gradient →", value: "gradient right" },
+      ],
+    },
+    overlayStrength: {
+      type: "select",
+      options: [
+        { label: "Light", value: "light" },
+        { label: "Medium", value: "medium" },
+        { label: "Heavy", value: "heavy" },
+      ],
+    },
+    knockout: {
+      type: "radio",
+      options: [
+        { label: "Off", value: "off" },
+        { label: "On", value: "on" },
       ],
     },
   },
@@ -69,135 +111,171 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
     title: "Your big idea, beautifully online.",
     description:
       "A flexible starting point for your next page. Swap in your own headline, story, and imagery — this layout adapts to whatever you publish.",
-    primaryCta: "Start free trial",
-    primaryHref: "#",
-    secondaryCta: "Book a demo →",
-    secondaryHref: "#",
+    primaryLabel: "Start free trial",
+    secondaryLabel: "Book a demo →",
     tone: "indigo",
     layout: "split",
-    align: "left",
-    imageUrl:
-      "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80",
+    imageSrc: "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80",
     imageSide: "right",
+    imageFill: "card",
+    splitRatio: "even",
+    align: "left",
+    overlay: "gradient right",
+    overlayStrength: "medium",
+    knockout: "off",
   },
   render: ({
     eyebrow,
     title,
     description,
-    primaryCta,
-    primaryHref,
-    secondaryCta,
-    secondaryHref,
+    primaryLabel,
+    secondaryLabel,
     tone,
     layout,
-    align,
-    imageUrl,
+    imageSrc,
     imageSide,
+    imageFill,
+    splitRatio,
+    align,
+    overlay,
+    overlayStrength,
+    knockout,
   }) => {
     const t = TONES[tone];
-    const onDark = t.onDark || layout === "full";
-    const center = align === "center";
+    const alignCls = align === "center" ? "text-center" : align === "right" ? "text-right" : "text-left";
+    const justify = align === "center" ? "justify-center" : align === "right" ? "justify-end" : "justify-start";
+    const img = imageSrc || "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80";
+    const ko = knockout === "on";
 
-    const primaryClasses = onDark
-      ? "bg-p1-warning text-p1-text"
-      : "bg-p1-primary text-white";
-    const secondaryClasses = onDark
-      ? "border border-white/40 text-white"
-      : "border border-p1-border text-p1-text";
-
-    const Copy = (
-      <div
-        className={`relative z-10 max-w-xl ${center ? "mx-auto text-center" : "text-left"}`}
-      >
-        {eyebrow && (
-          <span
-            className={`mb-p1-md inline-flex items-center gap-2 rounded-full px-p1-md py-p1-xs text-sm font-medium ${
-              onDark
-                ? "border border-white/20 bg-white/10 text-white"
-                : "border border-p1-border bg-white text-p1-text"
-            }`}
+    const Copy = ({ onDark }: { onDark: boolean }) => {
+      const titleStyle = ko
+        ? {
+            backgroundImage: `url(${img})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            WebkitTextFillColor: "transparent",
+          }
+        : undefined;
+      return (
+        <div className={`relative z-10 ${align === "center" ? "mx-auto" : ""} ${alignCls}`} style={{ maxWidth: align === "center" ? 760 : 560 }}>
+          {eyebrow && (
+            <span
+              className={`mb-p1-md inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium ${
+                onDark ? "border border-white/20 bg-white/10 text-white" : "border border-p1-border bg-white text-p1-text"
+              }`}
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-p1-warning" />
+              {eyebrow}
+            </span>
+          )}
+          <h1
+            className="text-4xl font-extrabold leading-[0.98] tracking-tight text-balance md:text-6xl"
+            style={titleStyle}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-p1-warning" />
-            {eyebrow}
-          </span>
-        )}
-        <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-balance md:text-6xl">
-          {title}
-        </h1>
-        <p
-          className={`mt-p1-md text-lg leading-relaxed ${onDark ? "text-white/85" : "text-p1-text-muted"}`}
-        >
-          {description}
-        </p>
-        <div
-          className={`mt-p1-lg flex flex-wrap gap-p1-sm ${center ? "justify-center" : "justify-start"}`}
-        >
-          {primaryCta && (
-            <a
-              href={primaryHref}
-              className={`inline-flex items-center rounded-full px-p1-lg py-p1-sm font-bold transition-opacity hover:opacity-90 ${primaryClasses}`}
-            >
-              {primaryCta}
-            </a>
-          )}
-          {secondaryCta && (
-            <a
-              href={secondaryHref}
-              className={`inline-flex items-center rounded-full px-p1-lg py-p1-sm font-bold ${secondaryClasses}`}
-            >
-              {secondaryCta}
-            </a>
-          )}
+            {title}
+          </h1>
+          <p className={`mt-p1-md max-w-xl text-lg leading-relaxed ${align === "center" ? "mx-auto" : align === "right" ? "ml-auto" : ""} ${onDark ? "text-white/90" : "text-p1-text-muted"}`}>
+            {description}
+          </p>
+          <div className={`mt-p1-lg flex flex-wrap gap-p1-sm ${justify}`}>
+            {primaryLabel && <Btn variant="yellow">{primaryLabel}</Btn>}
+            {secondaryLabel && (
+              <span
+                className={`inline-flex items-center rounded-full border px-6 py-3 text-sm font-bold ${
+                  onDark ? "border-white/30 text-white" : "border-p1-border text-p1-text"
+                }`}
+              >
+                {secondaryLabel}
+              </span>
+            )}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
 
-    if (layout === "full") {
+    if (layout === "full image") {
+      const a = ({ light: 0.32, medium: 0.56, heavy: 0.8 } as Record<string, number>)[overlayStrength] ?? 0.56;
+      let overlayBg = "none";
+      if (overlay === "scrim") overlayBg = `rgba(10,6,30,${a})`;
+      else if (overlay === "gradient down") overlayBg = `linear-gradient(180deg, rgba(10,6,30,0) 30%, rgba(10,6,30,${a}) 100%)`;
+      else if (overlay === "gradient right") overlayBg = `linear-gradient(90deg, rgba(10,6,30,${a + 0.12}) 0%, rgba(10,6,30,${a * 0.5}) 45%, rgba(10,6,30,0) 80%)`;
       return (
-        <section className="relative overflow-hidden bg-gray-900">
-          <img
-            src={imageUrl}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-          <div className="relative mx-auto flex min-h-[540px] max-w-7xl items-center px-p1-xl py-24">
-            {Copy}
+        <section className="relative grid min-h-[540px] items-center overflow-hidden bg-gray-900 px-p1-lg py-24">
+          <img src={img} alt="" className="absolute inset-0 z-0 h-full w-full object-cover" />
+          {overlayBg !== "none" && <div className="absolute inset-0 z-[1]" style={{ background: overlayBg }} />}
+          <div className={`relative z-[2] mx-auto flex w-full max-w-7xl ${justify}`}>
+            <Copy onDark={true} />
           </div>
         </section>
       );
     }
 
-    if (layout === "text") {
+    if (layout === "text only") {
       return (
-        <section className={`${t.wrap}`}>
-          <div
-            className={`mx-auto max-w-7xl px-p1-xl py-24 ${center ? "flex justify-center" : ""}`}
-          >
-            {Copy}
+        <section className={`overflow-hidden px-p1-lg py-24 ${t.wrap}`}>
+          <div className={`mx-auto flex max-w-7xl ${justify}`}>
+            <Copy onDark={t.onDark} />
           </div>
         </section>
       );
     }
 
-    const image = (
-      <div className="overflow-hidden rounded-p1-lg border border-white/15 bg-white/5 shadow-xl">
-        <img src={imageUrl} alt="" className="aspect-[4/3] h-full w-full object-cover" />
+    // split
+    const imgFirst = imageSide === "left";
+    const flush = imageFill === "flush";
+    const ratio = ({ even: [1, 1], "copy-wide": [1.45, 1], "image-wide": [1, 1.45] } as Record<string, number[]>)[splitRatio] || [1, 1];
+    const template = imgFirst ? `${ratio[1]}fr ${ratio[0]}fr` : `${ratio[0]}fr ${ratio[1]}fr`;
+
+    if (flush) {
+      const copyCell = (
+        <div className="flex items-center px-p1-lg py-20">
+          <Copy onDark={t.onDark} />
+        </div>
+      );
+      const imgCell = (
+        <div className="relative min-h-[440px] overflow-hidden">
+          <img src={img} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        </div>
+      );
+      return (
+        <section className={`overflow-hidden ${t.wrap}`}>
+          <div className="grid min-h-[480px] items-stretch md:grid-cols-2">
+            {imgFirst ? (
+              <>
+                {imgCell}
+                {copyCell}
+              </>
+            ) : (
+              <>
+                {copyCell}
+                {imgCell}
+              </>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    const imageCard = (
+      <div className={`overflow-hidden rounded-2xl ${t.onDark ? "border border-white/15 bg-white/5" : "border border-p1-border"}`}>
+        <img src={img} alt="" className="aspect-[4/3] h-full w-full object-cover" />
       </div>
     );
-
     return (
-      <section className={`${t.wrap} overflow-hidden`}>
-        <div className="mx-auto grid max-w-7xl items-center gap-p1-xl px-p1-xl py-20 md:grid-cols-2">
-          {imageSide === "left" ? (
+      <section className={`overflow-hidden px-p1-lg py-20 ${t.wrap}`}>
+        <div className="mx-auto grid max-w-7xl items-center gap-p1-xl md:gap-14" style={{ gridTemplateColumns: template }}>
+          {imgFirst ? (
             <>
-              {image}
-              {Copy}
+              {imageCard}
+              <Copy onDark={t.onDark} />
             </>
           ) : (
             <>
-              {Copy}
-              {image}
+              <Copy onDark={t.onDark} />
+              {imageCard}
             </>
           )}
         </div>

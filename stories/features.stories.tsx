@@ -13,7 +13,10 @@ const meta = {
   tags: ["autodocs"],
   argTypes: {
     columns: { control: "select", options: ["2", "3", "4"] },
-    colorScheme: { control: "select", options: ["brand-mix", "light", "purple", "dark", "outline"] },
+    colorScheme: { control: "select", options: ["brand mix", "light", "purple", "dark", "outline"] },
+    corners: { control: "select", options: ["sharp", "soft", "round"] },
+    depth: { control: "select", options: ["flat", "subtle", "raised"] },
+    cardAlign: { control: "radio", options: ["left", "center"] },
     sectionBg: { control: "select", options: ["light", "white", "dark", "none"] },
   },
 } satisfies Meta<typeof FeatureCardsWrapper>;
@@ -27,10 +30,17 @@ const cards = [
   { eyebrow: "Reliable", title: "Always on", body: "Fast, secure, and dependable — so you can focus on your content, not your infrastructure." },
 ];
 
-export const BrandMix: Story = {
-  args: { eyebrow: "Why teams choose us", heading: "Everything you need, in one place.", cards, columns: "3", colorScheme: "brand-mix", sectionBg: "light" },
+const base: FeatureCardsProps = {
+  subtitle: "Why teams choose us",
+  heading: "Everything you need, in one place.",
+  cards,
+  columns: "3",
+  colorScheme: "brand mix",
+  corners: "round",
+  depth: "flat",
+  cardAlign: "left",
+  sectionBg: "light",
 };
 
-export const LightOnDark: Story = {
-  args: { eyebrow: "Why teams choose us", heading: "Everything you need, in one place.", cards, columns: "3", colorScheme: "outline", sectionBg: "dark" },
-};
+export const BrandMix: Story = { args: { ...base } };
+export const Outline: Story = { args: { ...base, colorScheme: "outline", sectionBg: "white", depth: "subtle" } };
