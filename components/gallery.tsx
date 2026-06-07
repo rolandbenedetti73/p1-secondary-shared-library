@@ -85,8 +85,8 @@ const GalleryView: React.FC<GalleryProps> = ({ heading, layout, columns, gap, ra
   const rad = RADIUS[radius];
   const cap = captions === "on";
 
-  const Tile = ({ im, extra }: { im: GalleryImage; extra?: React.CSSProperties }) => (
-    <figure className="m-0" style={extra}>
+  const tile = (im: GalleryImage, key: number, extra?: React.CSSProperties) => (
+    <figure key={key} className="m-0" style={extra}>
       <div className={`overflow-hidden bg-gray-100 ${rad}`}>
         <img
           src={im.src}
@@ -103,17 +103,13 @@ const GalleryView: React.FC<GalleryProps> = ({ heading, layout, columns, gap, ra
   if (layout === "masonry") {
     body = (
       <div style={{ columnCount: cols, columnGap: g }}>
-        {imgs.map((im, i) => (
-          <Tile key={i} im={im} extra={{ breakInside: "avoid", marginBottom: g }} />
-        ))}
+        {imgs.map((im, i) => tile(im, i, { breakInside: "avoid", marginBottom: g }))}
       </div>
     );
   } else if (layout === "filmstrip") {
     body = (
       <div className="flex overflow-x-auto pb-2" style={{ gap: g }}>
-        {imgs.map((im, i) => (
-          <Tile key={i} im={im} extra={{ flex: "none", width: 340, height: 240 }} />
-        ))}
+        {imgs.map((im, i) => tile(im, i, { flex: "none", width: 340, height: 240 }))}
       </div>
     );
   } else if (layout === "carousel") {
@@ -121,9 +117,7 @@ const GalleryView: React.FC<GalleryProps> = ({ heading, layout, columns, gap, ra
   } else {
     body = (
       <div className="grid" style={{ gap: g, gridTemplateColumns: `repeat(${cols}, minmax(0,1fr))` }}>
-        {imgs.map((im, i) => (
-          <Tile key={i} im={im} extra={{ aspectRatio: ratio }} />
-        ))}
+        {imgs.map((im, i) => tile(im, i, { aspectRatio: ratio }))}
       </div>
     );
   }

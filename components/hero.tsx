@@ -147,7 +147,7 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
     const img = imageSrc || "https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1200&q=80";
     const ko = knockout === "on";
 
-    const Copy = ({ onDark }: { onDark: boolean }) => {
+    const copy = (onDark: boolean) => {
       const titleStyle = ko
         ? {
             backgroundImage: `url(${img})`,
@@ -207,7 +207,7 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
           <img src={img} alt="" className="absolute inset-0 z-0 h-full w-full object-cover" />
           {overlayBg !== "none" && <div className="absolute inset-0 z-[1]" style={{ background: overlayBg }} />}
           <div className={`relative z-[2] mx-auto flex w-full max-w-7xl ${justify}`}>
-            <Copy onDark={true} />
+            {copy(true)}
           </div>
         </section>
       );
@@ -217,7 +217,7 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
       return (
         <section className={`overflow-hidden px-p1-lg py-24 ${t.wrap}`}>
           <div className={`mx-auto flex max-w-7xl ${justify}`}>
-            <Copy onDark={t.onDark} />
+            {copy(t.onDark)}
           </div>
         </section>
       );
@@ -232,7 +232,7 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
     if (flush) {
       const copyCell = (
         <div className="flex items-center px-p1-lg py-20">
-          <Copy onDark={t.onDark} />
+          {copy(t.onDark)}
         </div>
       );
       const imgCell = (
@@ -270,11 +270,11 @@ export const HeroBlock: ComponentConfig<HeroProps> = {
           {imgFirst ? (
             <>
               {imageCard}
-              <Copy onDark={t.onDark} />
+              {copy(t.onDark)}
             </>
           ) : (
             <>
-              <Copy onDark={t.onDark} />
+              {copy(t.onDark)}
               {imageCard}
             </>
           )}
