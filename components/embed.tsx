@@ -33,8 +33,8 @@ export const EmbedBlock: ComponentConfig<EmbedProps> = {
         { label: "Generic", value: "generic" },
       ],
     },
-    url: { type: "text" },
-    title: { type: "text" },
+    url: { type: "text", contentEditable: true, visible: false },
+    title: { type: "text", contentEditable: true, visible: false },
     ratio: {
       type: "select",
       options: [
@@ -43,7 +43,7 @@ export const EmbedBlock: ComponentConfig<EmbedProps> = {
         { label: "1 / 1", value: "1 / 1" },
       ],
     },
-    caption: { type: "text" },
+    caption: { type: "text", contentEditable: true, visible: false },
     width: {
       type: "select",
       options: [

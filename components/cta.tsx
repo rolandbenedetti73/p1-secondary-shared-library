@@ -35,11 +35,11 @@ const PADDING: Record<CtaBannerProps["padding"], string> = { compact: "p-p1-lg",
 
 export const CtaBannerBlock: ComponentConfig<CtaBannerProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    title: { type: "text" },
-    subtitle: { type: "text" },
-    buttonLabel: { type: "text" },
-    secondaryLabel: { type: "text" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    title: { type: "text", contentEditable: true, visible: false },
+    subtitle: { type: "text", contentEditable: true, visible: false },
+    buttonLabel: { type: "text", contentEditable: true, visible: false },
+    secondaryLabel: { type: "text", contentEditable: true, visible: false },
     layout: {
       type: "select",
       options: [

@@ -16,8 +16,8 @@ const TONES: Record<AnnouncementProps["tone"], { wrap: string; link: string }> =
 
 export const AnnouncementBlock: ComponentConfig<AnnouncementProps> = {
   fields: {
-    text: { type: "text" },
-    linkLabel: { type: "text" },
+    text: { type: "text", contentEditable: true, visible: false },
+    linkLabel: { type: "text", contentEditable: true, visible: false },
     tone: {
       type: "select",
       options: [

@@ -18,9 +18,9 @@ const TONES: Record<TestimonialProps["tone"], { wrap: string; onDark: boolean; a
 
 export const TestimonialBlock: ComponentConfig<TestimonialProps> = {
   fields: {
-    quote: { type: "textarea" },
-    name: { type: "text" },
-    role: { type: "text" },
+    quote: { type: "textarea", contentEditable: true, visible: false },
+    name: { type: "text", contentEditable: true, visible: false },
+    role: { type: "text", contentEditable: true, visible: false },
     avatarSrc: { type: "text" },
     layout: {
       type: "select",

@@ -53,11 +53,11 @@ const SECTION_BG: Record<FeatureCardsProps["sectionBg"], string> = {
 
 export const FeatureCardsBlock: ComponentConfig<FeatureCardsProps> = {
   fields: {
-    subtitle: { type: "text" },
-    heading: { type: "text" },
+    subtitle: { type: "text", contentEditable: true, visible: false },
+    heading: { type: "text", contentEditable: true, visible: false },
     cards: {
       type: "array",
-      arrayFields: { eyebrow: { type: "text" }, title: { type: "text" }, body: { type: "textarea" } },
+      arrayFields: { eyebrow: { type: "text", contentEditable: true, visible: false }, title: { type: "text", contentEditable: true, visible: false }, body: { type: "textarea", contentEditable: true, visible: false } },
       defaultItemProps: { eyebrow: "Eyebrow", title: "Feature", body: "Describe the feature." },
       getItemSummary: (item) => item.title || "Card",
     },

@@ -12,10 +12,10 @@ export interface FaqProps {
 
 export const FaqBlock: ComponentConfig<FaqProps> = {
   fields: {
-    heading: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
     items: {
       type: "array",
-      arrayFields: { q: { type: "text" }, a: { type: "textarea" } },
+      arrayFields: { q: { type: "text", contentEditable: true, visible: false }, a: { type: "textarea", contentEditable: true, visible: false } },
       defaultItemProps: { q: "Question?", a: "Answer." },
       getItemSummary: (item) => item.q || "Question",
     },

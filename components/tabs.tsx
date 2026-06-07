@@ -58,7 +58,7 @@ const TabsView: React.FC<TabsProps> = ({ heading, align, tabs }) => {
 
 export const TabsBlock: ComponentConfig<TabsProps> = {
   fields: {
-    heading: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
     align: {
       type: "radio",
       options: [
@@ -69,8 +69,8 @@ export const TabsBlock: ComponentConfig<TabsProps> = {
     tabs: {
       type: "array",
       arrayFields: {
-        label: { type: "text" },
-        body: { type: "textarea" },
+        label: { type: "text", contentEditable: true, visible: false },
+        body: { type: "textarea", contentEditable: true, visible: false },
       },
       defaultItemProps: { label: "Tab", body: "Tab content." },
       getItemSummary: (item) => item.label || "Tab",

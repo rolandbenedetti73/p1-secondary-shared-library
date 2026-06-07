@@ -14,13 +14,13 @@ export interface ArticleHeaderProps {
 
 export const ArticleHeaderBlock: ComponentConfig<ArticleHeaderProps> = {
   fields: {
-    category: { type: "text" },
-    title: { type: "text" },
-    standfirst: { type: "textarea" },
-    authorName: { type: "text" },
-    authorAvatar: { type: "text" },
-    date: { type: "text" },
-    readTime: { type: "text" },
+    category: { type: "text", contentEditable: true, visible: false },
+    title: { type: "text", contentEditable: true, visible: false },
+    standfirst: { type: "textarea", contentEditable: true, visible: false },
+    authorName: { type: "text", contentEditable: true, visible: false },
+    authorAvatar: { type: "text", contentEditable: true, visible: false },
+    date: { type: "text", contentEditable: true, visible: false },
+    readTime: { type: "text", contentEditable: true, visible: false },
     align: {
       type: "radio",
       options: [

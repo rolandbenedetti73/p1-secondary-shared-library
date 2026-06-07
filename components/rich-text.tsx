@@ -16,7 +16,7 @@ const MEASURE: Record<RichTextProps["measure"], string> = {
 
 export const RichTextBlock: ComponentConfig<RichTextProps> = {
   fields: {
-    content: { type: "textarea" },
+    content: { type: "textarea", contentEditable: true, visible: false },
     measure: {
       type: "select",
       options: [

@@ -21,7 +21,7 @@ export const ListBlock: ComponentConfig<ListProps> = {
     },
     items: {
       type: "array",
-      arrayFields: { text: { type: "text" } },
+      arrayFields: { text: { type: "text", contentEditable: true, visible: false } },
       defaultItemProps: { text: "List item" },
       getItemSummary: (item) => item.text || "Item",
     },

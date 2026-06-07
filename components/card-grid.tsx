@@ -19,7 +19,7 @@ const COL_CLASS: Record<CardGridProps["columns"], string> = {
 
 export const CardGridBlock: ComponentConfig<CardGridProps> = {
   fields: {
-    heading: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
     columns: {
       type: "select",
       options: [
@@ -31,8 +31,8 @@ export const CardGridBlock: ComponentConfig<CardGridProps> = {
     items: {
       type: "array",
       arrayFields: {
-        title: { type: "text" },
-        subtitle: { type: "text" },
+        title: { type: "text", contentEditable: true, visible: false },
+        subtitle: { type: "text", contentEditable: true, visible: false },
         imageUrl: { type: "text" },
       },
       defaultItemProps: {

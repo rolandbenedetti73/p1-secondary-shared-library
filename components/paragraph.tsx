@@ -15,7 +15,7 @@ const BODY_SIZES: Record<ParagraphProps["size"], string> = {
 
 export const ParagraphBlock: ComponentConfig<ParagraphProps> = {
   fields: {
-    text: { type: "textarea" },
+    text: { type: "textarea", contentEditable: true, visible: false },
     style: {
       type: "radio",
       options: [

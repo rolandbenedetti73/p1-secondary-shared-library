@@ -48,8 +48,8 @@ export const CalloutBlock: ComponentConfig<CalloutProps> = {
         { label: "Warning", value: "warning" },
       ],
     },
-    title: { type: "text" },
-    body: { type: "textarea" },
+    title: { type: "text", contentEditable: true, visible: false },
+    body: { type: "textarea", contentEditable: true, visible: false },
   },
   defaultProps: {
     variant: "tip",

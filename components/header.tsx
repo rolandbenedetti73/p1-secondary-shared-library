@@ -32,10 +32,10 @@ const CTA: Record<Exclude<HeaderProps["ctaStyle"], "none">, string> = {
 
 export const HeaderBlock: ComponentConfig<HeaderProps> = {
   fields: {
-    logo: { type: "text" },
+    logo: { type: "text", contentEditable: true, visible: false },
     links: {
       type: "array",
-      arrayFields: { label: { type: "text" }, href: { type: "text" } },
+      arrayFields: { label: { type: "text", contentEditable: true, visible: false }, href: { type: "text", contentEditable: true, visible: false } },
       defaultItemProps: { label: "Link", href: "#" },
       getItemSummary: (item) => item.label || "Link",
     },
@@ -54,7 +54,7 @@ export const HeaderBlock: ComponentConfig<HeaderProps> = {
         { label: "On", value: "on" },
       ],
     },
-    ctaLabel: { type: "text" },
+    ctaLabel: { type: "text", contentEditable: true, visible: false },
     ctaStyle: {
       type: "select",
       options: [

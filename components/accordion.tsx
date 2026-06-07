@@ -58,7 +58,7 @@ const AccordionView: React.FC<AccordionProps> = ({ heading, align, items }) => {
 
 export const AccordionBlock: ComponentConfig<AccordionProps> = {
   fields: {
-    heading: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
     align: {
       type: "radio",
       options: [
@@ -69,8 +69,8 @@ export const AccordionBlock: ComponentConfig<AccordionProps> = {
     items: {
       type: "array",
       arrayFields: {
-        title: { type: "text" },
-        body: { type: "textarea" },
+        title: { type: "text", contentEditable: true, visible: false },
+        body: { type: "textarea", contentEditable: true, visible: false },
       },
       defaultItemProps: { title: "Section title", body: "Section content." },
       getItemSummary: (item) => item.title || "Section",

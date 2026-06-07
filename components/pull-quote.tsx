@@ -10,8 +10,8 @@ export interface PullQuoteProps {
 
 export const PullQuoteBlock: ComponentConfig<PullQuoteProps> = {
   fields: {
-    quote: { type: "textarea" },
-    cite: { type: "text" },
+    quote: { type: "textarea", contentEditable: true, visible: false },
+    cite: { type: "text", contentEditable: true, visible: false },
     accent: {
       type: "select",
       options: [

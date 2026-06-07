@@ -25,9 +25,9 @@ const RADIUS: Record<FigureProps["radius"], string> = {
 export const FigureBlock: ComponentConfig<FigureProps> = {
   fields: {
     src: { type: "text" },
-    alt: { type: "text" },
-    caption: { type: "text" },
-    credit: { type: "text" },
+    alt: { type: "text", contentEditable: true, visible: false },
+    caption: { type: "text", contentEditable: true, visible: false },
+    credit: { type: "text", contentEditable: true, visible: false },
     ratio: {
       type: "select",
       options: [

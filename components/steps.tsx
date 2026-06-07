@@ -19,11 +19,11 @@ const TONES: Record<StepsProps["tone"], { wrap: string; onDark: boolean }> = {
 
 export const StepsBlock: ComponentConfig<StepsProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    heading: { type: "text" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    heading: { type: "text", contentEditable: true, visible: false },
     items: {
       type: "array",
-      arrayFields: { title: { type: "text" }, body: { type: "textarea" } },
+      arrayFields: { title: { type: "text", contentEditable: true, visible: false }, body: { type: "textarea", contentEditable: true, visible: false } },
       defaultItemProps: { title: "Step", body: "Describe this step." },
       getItemSummary: (item) => item.title || "Step",
     },

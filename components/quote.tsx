@@ -9,8 +9,8 @@ export interface QuoteProps {
 
 export const QuoteBlock: ComponentConfig<QuoteProps> = {
   fields: {
-    quote: { type: "textarea" },
-    attribution: { type: "text" },
+    quote: { type: "textarea", contentEditable: true, visible: false },
+    attribution: { type: "text", contentEditable: true, visible: false },
     scale: {
       type: "radio",
       options: [

@@ -24,16 +24,16 @@ const TONES: Record<FeatureMediaProps["tone"], { wrap: string; onDark: boolean }
 
 export const FeatureMediaBlock: ComponentConfig<FeatureMediaProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    title: { type: "text" },
-    body: { type: "textarea" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    title: { type: "text", contentEditable: true, visible: false },
+    body: { type: "textarea", contentEditable: true, visible: false },
     bullets: {
       type: "array",
-      arrayFields: { text: { type: "text" } },
+      arrayFields: { text: { type: "text", contentEditable: true, visible: false } },
       defaultItemProps: { text: "Benefit" },
       getItemSummary: (item) => item.text || "Bullet",
     },
-    buttonLabel: { type: "text" },
+    buttonLabel: { type: "text", contentEditable: true, visible: false },
     imageSrc: { type: "text" },
     mediaSide: {
       type: "radio",

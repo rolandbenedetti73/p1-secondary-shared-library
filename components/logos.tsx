@@ -15,7 +15,7 @@ const HEIGHT: Record<LogoCloudProps["height"], number> = { small: 26, medium: 38
 
 export const LogoCloudBlock: ComponentConfig<LogoCloudProps> = {
   fields: {
-    heading: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
     style: {
       type: "radio",
       options: [
@@ -33,7 +33,7 @@ export const LogoCloudBlock: ComponentConfig<LogoCloudProps> = {
     },
     logos: {
       type: "array",
-      arrayFields: { src: { type: "text" }, label: { type: "text" } },
+      arrayFields: { src: { type: "text", contentEditable: true, visible: false }, label: { type: "text", contentEditable: true, visible: false } },
       defaultItemProps: { src: "", label: "Brand" },
       getItemSummary: (item) => item.label || "Logo",
     },

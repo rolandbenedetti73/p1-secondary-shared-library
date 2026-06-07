@@ -28,11 +28,11 @@ const TONES: Record<HeroProps["tone"], { wrap: string; onDark: boolean }> = {
 
 export const HeroBlock: ComponentConfig<HeroProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    title: { type: "text" },
-    description: { type: "textarea" },
-    primaryLabel: { type: "text" },
-    secondaryLabel: { type: "text" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    title: { type: "text", contentEditable: true, visible: false },
+    description: { type: "textarea", contentEditable: true, visible: false },
+    primaryLabel: { type: "text", contentEditable: true, visible: false },
+    secondaryLabel: { type: "text", contentEditable: true, visible: false },
     tone: {
       type: "select",
       options: [

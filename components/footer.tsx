@@ -56,11 +56,11 @@ const SOCIAL: IconName[] = ["globe", "mail", "external"];
 
 export const FooterBlock: ComponentConfig<FooterProps> = {
   fields: {
-    logo: { type: "text" },
-    tagline: { type: "textarea" },
+    logo: { type: "text", contentEditable: true, visible: false },
+    tagline: { type: "textarea", contentEditable: true, visible: false },
     columns: {
       type: "array",
-      arrayFields: { title: { type: "text" }, links: { type: "textarea" } },
+      arrayFields: { title: { type: "text", contentEditable: true, visible: false }, links: { type: "textarea", contentEditable: true, visible: false } },
       defaultItemProps: { title: "Column", links: "Link one\nLink two" },
       getItemSummary: (item) => item.title || "Column",
     },
@@ -71,8 +71,8 @@ export const FooterBlock: ComponentConfig<FooterProps> = {
         { label: "Off", value: "off" },
       ],
     },
-    newsletterTitle: { type: "text" },
-    newsletterButton: { type: "text" },
+    newsletterTitle: { type: "text", contentEditable: true, visible: false },
+    newsletterButton: { type: "text", contentEditable: true, visible: false },
     social: {
       type: "radio",
       options: [
@@ -87,8 +87,8 @@ export const FooterBlock: ComponentConfig<FooterProps> = {
         { label: "Off", value: "off" },
       ],
     },
-    copyright: { type: "text" },
-    legalLinks: { type: "textarea" },
+    copyright: { type: "text", contentEditable: true, visible: false },
+    legalLinks: { type: "textarea", contentEditable: true, visible: false },
     tone: {
       type: "select",
       options: [

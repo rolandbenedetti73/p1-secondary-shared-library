@@ -20,7 +20,7 @@ export const StatsBlock: ComponentConfig<StatsProps> = {
     },
     items: {
       type: "array",
-      arrayFields: { value: { type: "text" }, label: { type: "text" } },
+      arrayFields: { value: { type: "text", contentEditable: true, visible: false }, label: { type: "text", contentEditable: true, visible: false } },
       defaultItemProps: { value: "100%", label: "Metric" },
       getItemSummary: (item) => item.value || "Stat",
     },

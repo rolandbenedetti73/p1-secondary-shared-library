@@ -15,7 +15,7 @@ const SIZES: Record<HeadingProps["level"], string> = {
 
 export const HeadingBlock: ComponentConfig<HeadingProps> = {
   fields: {
-    text: { type: "text" },
+    text: { type: "text", contentEditable: true, visible: false },
     level: {
       type: "select",
       options: [

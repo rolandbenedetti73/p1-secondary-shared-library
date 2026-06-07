@@ -146,7 +146,7 @@ const GalleryView: React.FC<GalleryProps> = ({ heading, layout, columns, gap, ra
 
 export const GalleryBlock: ComponentConfig<GalleryProps> = {
   fields: {
-    heading: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
     layout: {
       type: "select",
       options: [
@@ -200,7 +200,7 @@ export const GalleryBlock: ComponentConfig<GalleryProps> = {
       type: "array",
       arrayFields: {
         src: { type: "text" },
-        caption: { type: "text" },
+        caption: { type: "text", contentEditable: true, visible: false },
       },
       defaultItemProps: { src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80", caption: "" },
       getItemSummary: (item) => item.caption || "Image",

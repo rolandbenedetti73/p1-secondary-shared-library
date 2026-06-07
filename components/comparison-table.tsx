@@ -38,10 +38,10 @@ const CmpCell = ({ v, hot }: { v: string; hot: boolean }) => {
 
 export const ComparisonTableBlock: ComponentConfig<ComparisonTableProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    heading: { type: "text" },
-    subtitle: { type: "text" },
-    columns: { type: "textarea" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    heading: { type: "text", contentEditable: true, visible: false },
+    subtitle: { type: "text", contentEditable: true, visible: false },
+    columns: { type: "textarea", contentEditable: true, visible: false },
     featured: {
       type: "select",
       options: [
@@ -55,11 +55,11 @@ export const ComparisonTableBlock: ComponentConfig<ComparisonTableProps> = {
     rows: {
       type: "array",
       arrayFields: {
-        feature: { type: "text" },
-        c1: { type: "text" },
-        c2: { type: "text" },
-        c3: { type: "text" },
-        c4: { type: "text" },
+        feature: { type: "text", contentEditable: true, visible: false },
+        c1: { type: "text", contentEditable: true, visible: false },
+        c2: { type: "text", contentEditable: true, visible: false },
+        c3: { type: "text", contentEditable: true, visible: false },
+        c4: { type: "text", contentEditable: true, visible: false },
       },
       defaultItemProps: { feature: "Feature", c1: "yes", c2: "yes", c3: "yes", c4: "" },
       getItemSummary: (item) => item.feature || "Feature",

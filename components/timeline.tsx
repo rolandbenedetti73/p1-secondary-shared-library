@@ -27,8 +27,8 @@ const Content = ({ it }: { it: TimelineItem }) => (
 
 export const TimelineBlock: ComponentConfig<TimelineProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    heading: { type: "text" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    heading: { type: "text", contentEditable: true, visible: false },
     layout: {
       type: "select",
       options: [
@@ -46,9 +46,9 @@ export const TimelineBlock: ComponentConfig<TimelineProps> = {
     items: {
       type: "array",
       arrayFields: {
-        date: { type: "text" },
-        title: { type: "text" },
-        body: { type: "textarea" },
+        date: { type: "text", contentEditable: true, visible: false },
+        title: { type: "text", contentEditable: true, visible: false },
+        body: { type: "textarea", contentEditable: true, visible: false },
       },
       defaultItemProps: { date: "Year", title: "Milestone", body: "What happened." },
       getItemSummary: (item) => item.title || "Milestone",

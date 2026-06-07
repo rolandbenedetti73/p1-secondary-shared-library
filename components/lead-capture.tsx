@@ -27,11 +27,11 @@ const TONES: Record<LeadCaptureProps["tone"], LeadTone> = {
 
 export const LeadCaptureBlock: ComponentConfig<LeadCaptureProps> = {
   fields: {
-    heading: { type: "text" },
-    subtitle: { type: "text" },
-    placeholder: { type: "text" },
-    buttonLabel: { type: "text" },
-    note: { type: "text" },
+    heading: { type: "text", contentEditable: true, visible: false },
+    subtitle: { type: "text", contentEditable: true, visible: false },
+    placeholder: { type: "text", contentEditable: true, visible: false },
+    buttonLabel: { type: "text", contentEditable: true, visible: false },
+    note: { type: "text", contentEditable: true, visible: false },
     tone: {
       type: "select",
       options: [

@@ -23,8 +23,8 @@ const COL_CLASS: Record<TeamGridProps["columns"], string> = {
 
 export const TeamGridBlock: ComponentConfig<TeamGridProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    heading: { type: "text" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    heading: { type: "text", contentEditable: true, visible: false },
     columns: {
       type: "select",
       options: [
@@ -50,10 +50,10 @@ export const TeamGridBlock: ComponentConfig<TeamGridProps> = {
     members: {
       type: "array",
       arrayFields: {
-        name: { type: "text" },
-        role: { type: "text" },
+        name: { type: "text", contentEditable: true, visible: false },
+        role: { type: "text", contentEditable: true, visible: false },
         avatar: { type: "text" },
-        bio: { type: "textarea" },
+        bio: { type: "textarea", contentEditable: true, visible: false },
       },
       defaultItemProps: { name: "Team member", role: "Role", avatar: "", bio: "" },
       getItemSummary: (item) => item.name || "Member",

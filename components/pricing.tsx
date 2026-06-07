@@ -25,17 +25,17 @@ const splitLines = (s: string) =>
 
 export const PricingBlock: ComponentConfig<PricingProps> = {
   fields: {
-    eyebrow: { type: "text" },
-    heading: { type: "text" },
-    subtitle: { type: "text" },
+    eyebrow: { type: "text", contentEditable: true, visible: false },
+    heading: { type: "text", contentEditable: true, visible: false },
+    subtitle: { type: "text", contentEditable: true, visible: false },
     tiers: {
       type: "array",
       arrayFields: {
-        name: { type: "text" },
-        price: { type: "text" },
-        period: { type: "text" },
-        features: { type: "textarea" },
-        buttonLabel: { type: "text" },
+        name: { type: "text", contentEditable: true, visible: false },
+        price: { type: "text", contentEditable: true, visible: false },
+        period: { type: "text", contentEditable: true, visible: false },
+        features: { type: "textarea", contentEditable: true, visible: false },
+        buttonLabel: { type: "text", contentEditable: true, visible: false },
         featured: {
           type: "radio",
           options: [

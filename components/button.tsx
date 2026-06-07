@@ -10,7 +10,7 @@ export interface ButtonProps {
 
 export const ButtonBlock: ComponentConfig<ButtonProps> = {
   fields: {
-    label: { type: "text" },
+    label: { type: "text", contentEditable: true, visible: false },
     href: { type: "text" },
     variant: {
       type: "select",
