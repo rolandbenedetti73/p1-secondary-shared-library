@@ -34,7 +34,7 @@ export const PricingBlock: ComponentConfig<PricingProps> = {
         name: { type: "text", contentEditable: true, visible: false },
         price: { type: "text", contentEditable: true, visible: false },
         period: { type: "text", contentEditable: true, visible: false },
-        features: { type: "textarea", contentEditable: true, visible: false },
+        features: { type: "textarea" },
         buttonLabel: { type: "text", contentEditable: true, visible: false },
         featured: {
           type: "radio",

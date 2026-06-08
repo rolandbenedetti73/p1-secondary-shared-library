@@ -60,7 +60,7 @@ export const FooterBlock: ComponentConfig<FooterProps> = {
     tagline: { type: "textarea", contentEditable: true, visible: false },
     columns: {
       type: "array",
-      arrayFields: { title: { type: "text", contentEditable: true, visible: false }, links: { type: "textarea", contentEditable: true, visible: false } },
+      arrayFields: { title: { type: "text", contentEditable: true, visible: false }, links: { type: "textarea" } },
       defaultItemProps: { title: "Column", links: "Link one\nLink two" },
       getItemSummary: (item) => item.title || "Column",
     },
@@ -88,7 +88,7 @@ export const FooterBlock: ComponentConfig<FooterProps> = {
       ],
     },
     copyright: { type: "text", contentEditable: true, visible: false },
-    legalLinks: { type: "textarea", contentEditable: true, visible: false },
+    legalLinks: { type: "textarea" },
     tone: {
       type: "select",
       options: [

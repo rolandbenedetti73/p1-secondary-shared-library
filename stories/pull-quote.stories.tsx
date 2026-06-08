@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 const base: PullQuoteProps = {
   quote:
-    "The best workflow is the one your whole team ==actually uses== — not the one that looks impressive in a diagram.",
+    "The best workflow is the one your whole team <mark>actually uses</mark> — not the one that looks impressive in a diagram.",
   cite: "Jordan Ellis, Operations Lead",
   accent: "yellow rule",
   align: "center",

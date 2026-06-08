@@ -24,15 +24,15 @@ export const Default: Story = {
     tabs: [
       {
         label: "Develop",
-        body: "Branch every change into its own ==Multidev== environment.\n\n- No more stepping on each other\n- Real URLs to share for review\n- Merge when it's ready",
+        body: "<p>Branch every change into its own <mark>Multidev</mark> environment.</p><ul><li>No more stepping on each other</li><li>Real URLs to share for review</li><li>Merge when it's ready</li></ul>",
       },
       {
         label: "Test",
-        body: "Push to Test with one click and run against ==production-like data==.\n\n- Automated visual checks\n- Stakeholder sign-off\n- Nothing surprises you on Live",
+        body: "<p>Push to Test with one click and run against <mark>production-like data</mark>.</p><ul><li>Automated visual checks</li><li>Stakeholder sign-off</li><li>Nothing surprises you on Live</li></ul>",
       },
       {
         label: "Launch",
-        body: "Deploy to Live in seconds — and roll back just as fast if you need to.\n\n> Confidence to publish on a Friday afternoon.",
+        body: "<p>Deploy to Live in seconds — and roll back just as fast if you need to.</p><blockquote>Confidence to publish on a Friday afternoon.</blockquote>",
       },
     ],
   },

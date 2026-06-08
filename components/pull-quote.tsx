@@ -1,5 +1,5 @@
 import { ComponentConfig } from "@puckeditor/core";
-import { inline } from "./prose";
+import { RichValue } from "./rich";
 
 export interface PullQuoteProps {
   quote: string;
@@ -8,9 +8,13 @@ export interface PullQuoteProps {
   align: "center" | "left";
 }
 
+const PQ_INNER =
+  "[&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&_p]:m-0 " +
+  "[&_strong]:font-bold [&_em]:italic [&_mark]:rounded-sm [&_mark]:bg-p1-warning/40 [&_mark]:px-0.5 [&_a]:underline";
+
 export const PullQuoteBlock: ComponentConfig<PullQuoteProps> = {
   fields: {
-    quote: { type: "textarea", contentEditable: true, visible: false },
+    quote: { type: "richtext", contentEditable: true, visible: false },
     cite: { type: "text", contentEditable: true, visible: false },
     accent: {
       type: "select",
@@ -30,7 +34,7 @@ export const PullQuoteBlock: ComponentConfig<PullQuoteProps> = {
   },
   defaultProps: {
     quote:
-      "The best workflow is the one your whole team ==actually uses== — not the one that looks impressive in a diagram.",
+      "The best workflow is the one your whole team <mark>actually uses</mark> — not the one that looks impressive in a diagram.",
     cite: "Jordan Ellis, Operations Lead",
     accent: "yellow rule",
     align: "center",
@@ -52,9 +56,9 @@ export const PullQuoteBlock: ComponentConfig<PullQuoteProps> = {
               “
             </div>
           )}
-          <p className="mb-p1-md font-serif text-3xl font-medium italic leading-tight text-balance text-p1-text md:text-4xl">
-            {inline(quote)}
-          </p>
+          <div className={`mb-p1-md font-serif text-3xl font-medium italic leading-tight text-balance text-p1-text md:text-4xl ${center ? "" : ""}`}>
+            <RichValue value={quote} className={PQ_INNER} />
+          </div>
           {cite && (
             <cite className="font-semibold not-italic tracking-wide text-p1-primary">— {cite}</cite>
           )}

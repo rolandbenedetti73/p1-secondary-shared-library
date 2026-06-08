@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ComponentConfig } from "@puckeditor/core";
-import { renderProse } from "./prose";
+import { RichValue, RICH_PROSE } from "./rich";
 
 export interface TabItem {
   label: string;
@@ -51,7 +51,7 @@ const TabsView: React.FC<TabsProps> = ({ heading, align, tabs }) => {
           );
         })}
       </div>
-      <div>{renderProse((list[i] || ({} as TabItem)).body || "", { baseSize: "regular" })}</div>
+      <RichValue value={(list[i] || ({} as TabItem)).body || ""} className={RICH_PROSE} />
     </div>
   );
 };
@@ -70,9 +70,11 @@ export const TabsBlock: ComponentConfig<TabsProps> = {
       type: "array",
       arrayFields: {
         label: { type: "text", contentEditable: true, visible: false },
-        body: { type: "textarea", contentEditable: true, visible: false },
+        // richtext stays visible in the array-item editor so every tab is
+        // editable; the active tab is also click-to-edit on the canvas.
+        body: { type: "richtext", contentEditable: true },
       },
-      defaultItemProps: { label: "Tab", body: "Tab content." },
+      defaultItemProps: { label: "Tab", body: "<p>Tab content.</p>" },
       getItemSummary: (item) => item.label || "Tab",
     },
   },
@@ -82,15 +84,15 @@ export const TabsBlock: ComponentConfig<TabsProps> = {
     tabs: [
       {
         label: "Develop",
-        body: "Branch every change into its own ==Multidev== environment.\n\n- No more stepping on each other\n- Real URLs to share for review\n- Merge when it's ready",
+        body: "<p>Branch every change into its own <mark>Multidev</mark> environment.</p><ul><li>No more stepping on each other</li><li>Real URLs to share for review</li><li>Merge when it's ready</li></ul>",
       },
       {
         label: "Test",
-        body: "Push to Test with one click and run against ==production-like data==.\n\n- Automated visual checks\n- Stakeholder sign-off\n- Nothing surprises you on Live",
+        body: "<p>Push to Test with one click and run against <mark>production-like data</mark>.</p><ul><li>Automated visual checks</li><li>Stakeholder sign-off</li><li>Nothing surprises you on Live</li></ul>",
       },
       {
         label: "Launch",
-        body: "Deploy to Live in seconds — and roll back just as fast if you need to.\n\n> Confidence to publish on a Friday afternoon.",
+        body: "<p>Deploy to Live in seconds — and roll back just as fast if you need to.</p><blockquote>Confidence to publish on a Friday afternoon.</blockquote>",
       },
     ],
   },

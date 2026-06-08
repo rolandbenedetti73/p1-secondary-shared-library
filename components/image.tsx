@@ -20,7 +20,7 @@ const RADIUS: Record<ImageProps["radius"], string> = {
 export const ImageBlock: ComponentConfig<ImageProps> = {
   fields: {
     src: { type: "text" },
-    alt: { type: "text", contentEditable: true, visible: false },
+    alt: { type: "text" },
     width: {
       type: "radio",
       options: [

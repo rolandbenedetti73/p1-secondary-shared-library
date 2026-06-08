@@ -24,15 +24,15 @@ export const Default: Story = {
     items: [
       {
         title: "What frameworks are supported?",
-        body: "WordPress, Drupal, and Next.js — all on the same platform, with the same ==Dev-Test-Live== workflow.",
+        body: "<p>WordPress, Drupal, and Next.js — all on the same platform, with the same <mark>Dev-Test-Live</mark> workflow.</p>",
       },
       {
         title: "How do environments work?",
-        body: "Every site gets Dev, Test, and Live — plus unlimited Multidev branches for parallel work.\n\n- Isolated by default\n- Shareable preview URLs\n- One-click promotion",
+        body: "<p>Every site gets Dev, Test, and Live — plus unlimited Multidev branches for parallel work.</p><ul><li>Isolated by default</li><li>Shareable preview URLs</li><li>One-click promotion</li></ul>",
       },
       {
         title: "Can the whole team use it?",
-        body: "Yes. Developers, marketers, and IT share one workflow with role-based access — no one waits on anyone else.",
+        body: "<p>Yes. Developers, marketers, and IT share one workflow with role-based access — no one waits on anyone else.</p>",
       },
     ],
   },

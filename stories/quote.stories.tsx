@@ -18,7 +18,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const quote =
-  "Switching over was the easiest call we made all year — ==our team ships in hours, not weeks== now.";
+  "Switching over was the easiest call we made all year — <mark>our team ships in hours, not weeks</mark> now.";
 
 export const Standard: Story = { args: { quote, attribution: "Jordan Ellis, Operations Lead", scale: "standard" } };
 export const Display: Story = { args: { quote, attribution: "Jordan Ellis, Operations Lead", scale: "display" } };
